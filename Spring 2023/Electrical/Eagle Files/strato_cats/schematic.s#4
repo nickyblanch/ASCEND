@@ -4747,9 +4747,9 @@ part number 2062-2P from STA</description>
 <label x="-220.98" y="162.56" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="SD_R" gate="G$1" pin="1"/>
-<wire x1="-198.12" y1="93.98" x2="-210.82" y2="93.98" width="0.1524" layer="91"/>
-<label x="-210.82" y="93.98" size="1.778" layer="95"/>
+<pinref part="SD_R" gate="G$1" pin="8"/>
+<wire x1="-198.12" y1="76.2" x2="-210.82" y2="76.2" width="0.1524" layer="91"/>
+<label x="-210.82" y="76.2" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="NS" class="0">

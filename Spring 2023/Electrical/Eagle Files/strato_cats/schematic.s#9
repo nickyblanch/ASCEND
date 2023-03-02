@@ -4458,6 +4458,96 @@ part number 2062-2P from STA</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="supply2">
+<packages>
+</packages>
+<symbols>
+<symbol name="GND">
+<wire x1="-1.27" y1="0" x2="1.27" y2="0" width="0.254" layer="94"/>
+<wire x1="1.27" y1="0" x2="0" y2="-1.27" width="0.254" layer="94"/>
+<wire x1="0" y1="-1.27" x2="-1.27" y2="0" width="0.254" layer="94"/>
+<text x="-1.905" y="-3.175" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="GND" x="0" y="2.54" visible="off" length="short" direction="sup" rot="R270"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="GND" prefix="SUPPLY">
+<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
+<gates>
+<gate name="GND" symbol="GND" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+<library name="SparkFun-PowerSymbols">
+<description>&lt;h3&gt;SparkFun Power Symbols&lt;/h3&gt;
+This library contains power, ground, and voltage-supply symbols.
+&lt;br&gt;
+&lt;br&gt;
+We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
+&lt;br&gt;
+&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
+&lt;br&gt;
+&lt;br&gt;
+You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
+<packages>
+</packages>
+<symbols>
+<symbol name="DGND">
+<description>&lt;h3&gt;Digital Ground Supply&lt;/h3&gt;</description>
+<wire x1="-1.905" y1="0" x2="1.905" y2="0" width="0.254" layer="94"/>
+<pin name="GND" x="0" y="2.54" visible="off" length="short" direction="sup" rot="R270"/>
+<text x="0" y="-0.254" size="1.778" layer="96" align="top-center">&gt;VALUE</text>
+</symbol>
+<symbol name="VIN">
+<description>&lt;h3&gt;Input Voltage Supply&lt;/h3&gt;</description>
+<wire x1="0.762" y1="1.27" x2="0" y2="2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="-0.762" y2="1.27" width="0.254" layer="94"/>
+<pin name="VIN" x="0" y="0" visible="off" length="short" direction="sup" rot="R90"/>
+<text x="0" y="2.794" size="1.778" layer="96" align="bottom-center">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="GND" prefix="GND">
+<description>&lt;h3&gt;Ground Supply Symbol&lt;/h3&gt;
+&lt;p&gt;Generic signal ground supply symbol.&lt;/p&gt;</description>
+<gates>
+<gate name="1" symbol="DGND" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="VIN" prefix="SUPPLY">
+<description>&lt;h3&gt;Input Voltage Supply&lt;/h3&gt;
+&lt;p&gt;Generic voltage input supply symbol.&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="VIN" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -4478,13 +4568,20 @@ part number 2062-2P from STA</description>
 <part name="ARDUINO" library="SparkFun-Boards" deviceset="ARDUINO_MEGA_R3" device="FULL"/>
 <part name="BME" library="microbuilder" deviceset="HEADER-1X7" device="70MIL"/>
 <part name="GUVA" library="adafruit" deviceset="PINHD-1X3" device="CB"/>
+<part name="SD" library="adafruit" deviceset="PINHD-1X8" device="BIG"/>
+<part name="SUPPLY15" library="supply2" deviceset="GND" device=""/>
 <part name="GRAV" library="SparkFun-Connectors" deviceset="CONN_04" device="LOCK"/>
 <part name="9DOF_1" library="SparkFun-Connectors" deviceset="CONN_06" device="NO_SILK_NO_POP"/>
 <part name="9DOF_2" library="SparkFun-Connectors" deviceset="CONN_06" device="NO_SILK_NO_POP"/>
 <part name="BATT" library="SparkFun-Connectors" deviceset="CONN_02" device=""/>
 <part name="GEIGER" library="SparkFun-Connectors" deviceset="CONN_04" device="PTH"/>
 <part name="EXTRA_IO" library="SparkFun-Connectors" deviceset="CONN_06" device="SILK_FEMALE_PTH"/>
-<part name="SD_R" library="adafruit" deviceset="PINHD-1X8" device="BIG"/>
+<part name="J1" library="SparkFun-Connectors" deviceset="CONN_06" device="NO_SILK_NO_POP"/>
+<part name="SUPPLY1" library="SparkFun-PowerSymbols" deviceset="VIN" device=""/>
+<part name="GND1" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
+<part name="J2" library="SparkFun-Connectors" deviceset="CONN_06" device="NO_SILK_NO_POP"/>
+<part name="GND2" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
+<part name="SUPPLY2" library="SparkFun-PowerSymbols" deviceset="VIN" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -4502,6 +4599,13 @@ part number 2062-2P from STA</description>
 <instance part="GUVA" gate="A" x="-111.76" y="35.56" smashed="yes">
 <attribute name="NAME" x="-118.11" y="41.275" size="5.08" layer="95"/>
 <attribute name="VALUE" x="-118.11" y="27.94" size="1.778" layer="96"/>
+</instance>
+<instance part="SD" gate="G$1" x="-226.06" y="86.36" smashed="yes">
+<attribute name="NAME" x="-232.41" y="97.155" size="5.08" layer="95"/>
+<attribute name="VALUE" x="-232.41" y="71.12" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY15" gate="GND" x="-220.98" y="86.36" smashed="yes">
+<attribute name="VALUE" x="-222.885" y="83.185" size="1.778" layer="96"/>
 </instance>
 <instance part="GRAV" gate="J1" x="-218.44" y="15.24" smashed="yes">
 <attribute name="VALUE" x="-223.52" y="7.874" size="1.778" layer="96" font="vector"/>
@@ -4527,15 +4631,36 @@ part number 2062-2P from STA</description>
 <attribute name="VALUE" x="-241.3" y="147.574" size="1.778" layer="96" font="vector"/>
 <attribute name="NAME" x="-241.3" y="168.148" size="5.08" layer="95" font="vector"/>
 </instance>
-<instance part="SD_R" gate="G$1" x="-195.58" y="86.36" smashed="yes">
-<attribute name="NAME" x="-201.93" y="97.155" size="5.08" layer="95"/>
-<attribute name="VALUE" x="-201.93" y="71.12" size="1.778" layer="96"/>
+<instance part="J1" gate="G$1" x="45.72" y="170.18" smashed="yes">
+<attribute name="VALUE" x="40.64" y="160.274" size="1.778" layer="96" font="vector"/>
+<attribute name="NAME" x="40.64" y="180.848" size="1.778" layer="95" font="vector"/>
+</instance>
+<instance part="SUPPLY1" gate="G$1" x="53.34" y="182.88" smashed="yes">
+<attribute name="VALUE" x="53.34" y="185.674" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="GND1" gate="1" x="53.34" y="160.02" smashed="yes">
+<attribute name="VALUE" x="53.34" y="159.766" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="J2" gate="G$1" x="83.82" y="170.18" smashed="yes">
+<attribute name="VALUE" x="78.74" y="160.274" size="1.778" layer="96" font="vector"/>
+<attribute name="NAME" x="78.74" y="180.848" size="1.778" layer="95" font="vector"/>
+</instance>
+<instance part="GND2" gate="1" x="91.44" y="160.02" smashed="yes">
+<attribute name="VALUE" x="91.44" y="159.766" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="SUPPLY2" gate="G$1" x="91.44" y="180.34" smashed="yes">
+<attribute name="VALUE" x="91.44" y="183.134" size="1.778" layer="96" align="bottom-center"/>
 </instance>
 </instances>
 <busses>
 </busses>
 <nets>
 <net name="GND" class="1">
+<segment>
+<wire x1="-220.98" y1="88.9" x2="-228.6" y2="88.9" width="0.1524" layer="91"/>
+<pinref part="SD" gate="G$1" pin="3"/>
+<pinref part="SUPPLY15" gate="GND" pin="GND"/>
+</segment>
 <segment>
 <pinref part="GRAV" gate="J1" pin="2"/>
 <wire x1="-213.36" y1="15.24" x2="-208.28" y2="15.24" width="0.1524" layer="91"/>
@@ -4592,33 +4717,40 @@ part number 2062-2P from STA</description>
 <label x="-220.98" y="165.1" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="SD_R" gate="G$1" pin="3"/>
-<wire x1="-198.12" y1="88.9" x2="-210.82" y2="88.9" width="0.1524" layer="91"/>
-<label x="-210.82" y="88.9" size="1.778" layer="95"/>
+<pinref part="J1" gate="G$1" pin="1"/>
+<wire x1="50.8" y1="165.1" x2="53.34" y2="165.1" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="165.1" x2="53.34" y2="162.56" width="0.1524" layer="91"/>
+<pinref part="GND1" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="J2" gate="G$1" pin="1"/>
+<wire x1="91.44" y1="165.1" x2="91.44" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="165.1" x2="91.44" y2="165.1" width="0.1524" layer="91"/>
+<pinref part="GND2" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="CS" class="0">
+<segment>
+<pinref part="SD" gate="G$1" pin="7"/>
+<wire x1="-228.6" y1="78.74" x2="-246.38" y2="78.74" width="0.1524" layer="91"/>
+<label x="-246.38" y="78.74" size="1.778" layer="95"/>
+</segment>
 <segment>
 <pinref part="ARDUINO" gate="B1" pin="53/!CS"/>
 <wire x1="-68.58" y1="-27.94" x2="-76.2" y2="-27.94" width="0.1524" layer="91"/>
 <label x="-76.2" y="-27.94" size="1.778" layer="95"/>
 </segment>
-<segment>
-<wire x1="-198.12" y1="78.74" x2="-210.82" y2="78.74" width="0.1524" layer="91"/>
-<label x="-210.82" y="78.74" size="1.778" layer="95"/>
-<pinref part="SD_R" gate="G$1" pin="7"/>
-</segment>
 </net>
 <net name="CLK" class="0">
+<segment>
+<wire x1="-228.6" y1="86.36" x2="-246.38" y2="86.36" width="0.1524" layer="91"/>
+<pinref part="SD" gate="G$1" pin="4"/>
+<label x="-246.38" y="86.36" size="1.778" layer="95"/>
+</segment>
 <segment>
 <pinref part="ARDUINO" gate="B1" pin="52/SCK"/>
 <wire x1="-38.1" y1="-27.94" x2="-30.48" y2="-27.94" width="0.1524" layer="91"/>
 <label x="-35.56" y="-27.94" size="1.778" layer="95"/>
-</segment>
-<segment>
-<wire x1="-198.12" y1="86.36" x2="-210.82" y2="86.36" width="0.1524" layer="91"/>
-<label x="-210.82" y="86.36" size="1.778" layer="95"/>
-<pinref part="SD_R" gate="G$1" pin="4"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -4661,26 +4793,26 @@ part number 2062-2P from STA</description>
 </net>
 <net name="SDO" class="0">
 <segment>
+<pinref part="SD" gate="G$1" pin="5"/>
+<wire x1="-228.6" y1="83.82" x2="-246.38" y2="83.82" width="0.1524" layer="91"/>
+<label x="-246.38" y="83.82" size="1.778" layer="95"/>
+</segment>
+<segment>
 <pinref part="ARDUINO" gate="B1" pin="50/MISO"/>
 <wire x1="-38.1" y1="-25.4" x2="-30.48" y2="-25.4" width="0.1524" layer="91"/>
 <label x="-35.56" y="-25.4" size="1.778" layer="95"/>
 </segment>
-<segment>
-<wire x1="-198.12" y1="83.82" x2="-210.82" y2="83.82" width="0.1524" layer="91"/>
-<label x="-210.82" y="83.82" size="1.778" layer="95"/>
-<pinref part="SD_R" gate="G$1" pin="5"/>
-</segment>
 </net>
 <net name="SDI" class="0">
+<segment>
+<pinref part="SD" gate="G$1" pin="6"/>
+<wire x1="-228.6" y1="81.28" x2="-246.38" y2="81.28" width="0.1524" layer="91"/>
+<label x="-246.38" y="81.28" size="1.778" layer="95"/>
+</segment>
 <segment>
 <pinref part="ARDUINO" gate="B1" pin="51/MOSI"/>
 <wire x1="-68.58" y1="-25.4" x2="-76.2" y2="-25.4" width="0.1524" layer="91"/>
 <label x="-76.2" y="-25.4" size="1.778" layer="95"/>
-</segment>
-<segment>
-<wire x1="-198.12" y1="81.28" x2="-210.82" y2="81.28" width="0.1524" layer="91"/>
-<label x="-210.82" y="81.28" size="1.778" layer="95"/>
-<pinref part="SD_R" gate="G$1" pin="6"/>
 </segment>
 </net>
 <net name="SDA" class="0">
@@ -4747,9 +4879,9 @@ part number 2062-2P from STA</description>
 <label x="-220.98" y="162.56" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="SD_R" gate="G$1" pin="1"/>
-<wire x1="-198.12" y1="93.98" x2="-210.82" y2="93.98" width="0.1524" layer="91"/>
-<label x="-210.82" y="93.98" size="1.778" layer="95"/>
+<pinref part="9DOF_1" gate="G$1" pin="2"/>
+<wire x1="-60.96" y1="160.02" x2="-55.88" y2="160.02" width="0.1524" layer="91"/>
+<label x="-58.42" y="160.02" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="NS" class="0">
@@ -4801,11 +4933,74 @@ part number 2062-2P from STA</description>
 <label x="-30.48" y="48.26" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="3V" class="0">
+<net name="VIN" class="0">
 <segment>
-<pinref part="9DOF_1" gate="G$1" pin="2"/>
-<wire x1="-60.96" y1="160.02" x2="-55.88" y2="160.02" width="0.1524" layer="91"/>
-<label x="-58.42" y="160.02" size="1.778" layer="95"/>
+<pinref part="J1" gate="G$1" pin="2"/>
+<wire x1="50.8" y1="167.64" x2="53.34" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="167.64" x2="53.34" y2="182.88" width="0.1524" layer="91"/>
+<pinref part="SUPPLY1" gate="G$1" pin="VIN"/>
+</segment>
+<segment>
+<pinref part="J2" gate="G$1" pin="6"/>
+<wire x1="88.9" y1="177.8" x2="91.44" y2="177.8" width="0.1524" layer="91"/>
+<pinref part="SUPPLY2" gate="G$1" pin="VIN"/>
+<wire x1="91.44" y1="180.34" x2="91.44" y2="177.8" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="AUX_CL_VIN" class="0">
+<segment>
+<wire x1="91.44" y1="175.26" x2="88.9" y2="175.26" width="0.1524" layer="91"/>
+<label x="91.44" y="175.26" size="1.27" layer="95" font="vector" xref="yes"/>
+<pinref part="J2" gate="G$1" pin="5"/>
+</segment>
+</net>
+<net name="AUX_DA_VIN" class="0">
+<segment>
+<wire x1="91.44" y1="172.72" x2="88.9" y2="172.72" width="0.1524" layer="91"/>
+<label x="91.44" y="172.72" size="1.27" layer="95" font="vector" xref="yes"/>
+<pinref part="J2" gate="G$1" pin="4"/>
+</segment>
+</net>
+<net name="AD0/SDO_VIN" class="0">
+<segment>
+<wire x1="55.88" y1="175.26" x2="50.8" y2="175.26" width="0.1524" layer="91"/>
+<label x="55.88" y="175.26" size="1.27" layer="95" font="vector" xref="yes"/>
+<pinref part="J1" gate="G$1" pin="5"/>
+</segment>
+</net>
+<net name="SDA/SDI_VIN" class="0">
+<segment>
+<wire x1="55.88" y1="170.18" x2="50.8" y2="170.18" width="0.1524" layer="91"/>
+<label x="55.88" y="170.18" size="1.27" layer="95" font="vector" xref="yes"/>
+<pinref part="J1" gate="G$1" pin="3"/>
+</segment>
+</net>
+<net name="SCL/SCLK_VIN" class="0">
+<segment>
+<pinref part="J1" gate="G$1" pin="4"/>
+<wire x1="55.88" y1="172.72" x2="50.8" y2="172.72" width="0.1524" layer="91"/>
+<label x="55.88" y="172.72" size="1.27" layer="95" font="vector" xref="yes"/>
+</segment>
+</net>
+<net name="!CS!_VIN" class="0">
+<segment>
+<wire x1="55.88" y1="177.8" x2="50.8" y2="177.8" width="0.1524" layer="91"/>
+<label x="55.88" y="177.8" size="1.27" layer="95" font="vector" xref="yes"/>
+<pinref part="J1" gate="G$1" pin="6"/>
+</segment>
+</net>
+<net name="FSYNC_VIN" class="0">
+<segment>
+<wire x1="91.44" y1="170.18" x2="88.9" y2="170.18" width="0.1524" layer="91"/>
+<label x="91.44" y="170.18" size="1.27" layer="95" font="vector" xref="yes"/>
+<pinref part="J2" gate="G$1" pin="3"/>
+</segment>
+</net>
+<net name="INT_VIN" class="0">
+<segment>
+<wire x1="91.44" y1="167.64" x2="88.9" y2="167.64" width="0.1524" layer="91"/>
+<label x="91.44" y="167.64" size="1.27" layer="95" font="vector" xref="yes"/>
+<pinref part="J2" gate="G$1" pin="2"/>
 </segment>
 </net>
 </nets>

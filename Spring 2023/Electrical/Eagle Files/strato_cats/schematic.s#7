@@ -4458,34 +4458,6 @@ part number 2062-2P from STA</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="supply2">
-<packages>
-</packages>
-<symbols>
-<symbol name="GND">
-<wire x1="-1.27" y1="0" x2="1.27" y2="0" width="0.254" layer="94"/>
-<wire x1="1.27" y1="0" x2="0" y2="-1.27" width="0.254" layer="94"/>
-<wire x1="0" y1="-1.27" x2="-1.27" y2="0" width="0.254" layer="94"/>
-<text x="-1.905" y="-3.175" size="1.778" layer="96">&gt;VALUE</text>
-<pin name="GND" x="0" y="2.54" visible="off" length="short" direction="sup" rot="R270"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="GND" prefix="SUPPLY">
-<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
-<gates>
-<gate name="GND" symbol="GND" x="0" y="0"/>
-</gates>
-<devices>
-<device name="">
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 </libraries>
 <attributes>
 </attributes>
@@ -4506,15 +4478,13 @@ part number 2062-2P from STA</description>
 <part name="ARDUINO" library="SparkFun-Boards" deviceset="ARDUINO_MEGA_R3" device="FULL"/>
 <part name="BME" library="microbuilder" deviceset="HEADER-1X7" device="70MIL"/>
 <part name="GUVA" library="adafruit" deviceset="PINHD-1X3" device="CB"/>
-<part name="SD" library="adafruit" deviceset="PINHD-1X8" device="BIG"/>
-<part name="SUPPLY15" library="supply2" deviceset="GND" device=""/>
 <part name="GRAV" library="SparkFun-Connectors" deviceset="CONN_04" device="LOCK"/>
 <part name="9DOF_1" library="SparkFun-Connectors" deviceset="CONN_06" device="NO_SILK_NO_POP"/>
 <part name="9DOF_2" library="SparkFun-Connectors" deviceset="CONN_06" device="NO_SILK_NO_POP"/>
 <part name="BATT" library="SparkFun-Connectors" deviceset="CONN_02" device=""/>
 <part name="GEIGER" library="SparkFun-Connectors" deviceset="CONN_04" device="PTH"/>
 <part name="EXTRA_IO" library="SparkFun-Connectors" deviceset="CONN_06" device="SILK_FEMALE_PTH"/>
-<part name="JP1" library="adafruit" deviceset="PINHD-1X8" device="BIG"/>
+<part name="SD_R" library="adafruit" deviceset="PINHD-1X8" device="BIG"/>
 </parts>
 <sheets>
 <sheet>
@@ -4532,13 +4502,6 @@ part number 2062-2P from STA</description>
 <instance part="GUVA" gate="A" x="-111.76" y="35.56" smashed="yes">
 <attribute name="NAME" x="-118.11" y="41.275" size="5.08" layer="95"/>
 <attribute name="VALUE" x="-118.11" y="27.94" size="1.778" layer="96"/>
-</instance>
-<instance part="SD" gate="G$1" x="-226.06" y="86.36" smashed="yes">
-<attribute name="NAME" x="-232.41" y="97.155" size="5.08" layer="95"/>
-<attribute name="VALUE" x="-232.41" y="71.12" size="1.778" layer="96"/>
-</instance>
-<instance part="SUPPLY15" gate="GND" x="-220.98" y="86.36" smashed="yes">
-<attribute name="VALUE" x="-222.885" y="83.185" size="1.778" layer="96"/>
 </instance>
 <instance part="GRAV" gate="J1" x="-218.44" y="15.24" smashed="yes">
 <attribute name="VALUE" x="-223.52" y="7.874" size="1.778" layer="96" font="vector"/>
@@ -4564,8 +4527,8 @@ part number 2062-2P from STA</description>
 <attribute name="VALUE" x="-241.3" y="147.574" size="1.778" layer="96" font="vector"/>
 <attribute name="NAME" x="-241.3" y="168.148" size="5.08" layer="95" font="vector"/>
 </instance>
-<instance part="JP1" gate="G$1" x="-195.58" y="86.36" smashed="yes">
-<attribute name="NAME" x="-201.93" y="97.155" size="1.778" layer="95"/>
+<instance part="SD_R" gate="G$1" x="-195.58" y="86.36" smashed="yes">
+<attribute name="NAME" x="-201.93" y="97.155" size="5.08" layer="95"/>
 <attribute name="VALUE" x="-201.93" y="71.12" size="1.778" layer="96"/>
 </instance>
 </instances>
@@ -4573,11 +4536,6 @@ part number 2062-2P from STA</description>
 </busses>
 <nets>
 <net name="GND" class="1">
-<segment>
-<wire x1="-220.98" y1="88.9" x2="-228.6" y2="88.9" width="0.1524" layer="91"/>
-<pinref part="SD" gate="G$1" pin="3"/>
-<pinref part="SUPPLY15" gate="GND" pin="GND"/>
-</segment>
 <segment>
 <pinref part="GRAV" gate="J1" pin="2"/>
 <wire x1="-213.36" y1="15.24" x2="-208.28" y2="15.24" width="0.1524" layer="91"/>
@@ -4634,17 +4592,12 @@ part number 2062-2P from STA</description>
 <label x="-220.98" y="165.1" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="JP1" gate="G$1" pin="3"/>
+<pinref part="SD_R" gate="G$1" pin="3"/>
 <wire x1="-198.12" y1="88.9" x2="-210.82" y2="88.9" width="0.1524" layer="91"/>
 <label x="-210.82" y="88.9" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="CS" class="0">
-<segment>
-<pinref part="SD" gate="G$1" pin="7"/>
-<wire x1="-228.6" y1="78.74" x2="-246.38" y2="78.74" width="0.1524" layer="91"/>
-<label x="-246.38" y="78.74" size="1.778" layer="95"/>
-</segment>
 <segment>
 <pinref part="ARDUINO" gate="B1" pin="53/!CS"/>
 <wire x1="-68.58" y1="-27.94" x2="-76.2" y2="-27.94" width="0.1524" layer="91"/>
@@ -4653,15 +4606,10 @@ part number 2062-2P from STA</description>
 <segment>
 <wire x1="-198.12" y1="78.74" x2="-210.82" y2="78.74" width="0.1524" layer="91"/>
 <label x="-210.82" y="78.74" size="1.778" layer="95"/>
-<pinref part="JP1" gate="G$1" pin="7"/>
+<pinref part="SD_R" gate="G$1" pin="7"/>
 </segment>
 </net>
 <net name="CLK" class="0">
-<segment>
-<wire x1="-228.6" y1="86.36" x2="-246.38" y2="86.36" width="0.1524" layer="91"/>
-<pinref part="SD" gate="G$1" pin="4"/>
-<label x="-246.38" y="86.36" size="1.778" layer="95"/>
-</segment>
 <segment>
 <pinref part="ARDUINO" gate="B1" pin="52/SCK"/>
 <wire x1="-38.1" y1="-27.94" x2="-30.48" y2="-27.94" width="0.1524" layer="91"/>
@@ -4670,7 +4618,7 @@ part number 2062-2P from STA</description>
 <segment>
 <wire x1="-198.12" y1="86.36" x2="-210.82" y2="86.36" width="0.1524" layer="91"/>
 <label x="-210.82" y="86.36" size="1.778" layer="95"/>
-<pinref part="JP1" gate="G$1" pin="4"/>
+<pinref part="SD_R" gate="G$1" pin="4"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -4713,11 +4661,6 @@ part number 2062-2P from STA</description>
 </net>
 <net name="SDO" class="0">
 <segment>
-<pinref part="SD" gate="G$1" pin="5"/>
-<wire x1="-228.6" y1="83.82" x2="-246.38" y2="83.82" width="0.1524" layer="91"/>
-<label x="-246.38" y="83.82" size="1.778" layer="95"/>
-</segment>
-<segment>
 <pinref part="ARDUINO" gate="B1" pin="50/MISO"/>
 <wire x1="-38.1" y1="-25.4" x2="-30.48" y2="-25.4" width="0.1524" layer="91"/>
 <label x="-35.56" y="-25.4" size="1.778" layer="95"/>
@@ -4725,15 +4668,10 @@ part number 2062-2P from STA</description>
 <segment>
 <wire x1="-198.12" y1="83.82" x2="-210.82" y2="83.82" width="0.1524" layer="91"/>
 <label x="-210.82" y="83.82" size="1.778" layer="95"/>
-<pinref part="JP1" gate="G$1" pin="5"/>
+<pinref part="SD_R" gate="G$1" pin="5"/>
 </segment>
 </net>
 <net name="SDI" class="0">
-<segment>
-<pinref part="SD" gate="G$1" pin="6"/>
-<wire x1="-228.6" y1="81.28" x2="-246.38" y2="81.28" width="0.1524" layer="91"/>
-<label x="-246.38" y="81.28" size="1.778" layer="95"/>
-</segment>
 <segment>
 <pinref part="ARDUINO" gate="B1" pin="51/MOSI"/>
 <wire x1="-68.58" y1="-25.4" x2="-76.2" y2="-25.4" width="0.1524" layer="91"/>
@@ -4742,7 +4680,7 @@ part number 2062-2P from STA</description>
 <segment>
 <wire x1="-198.12" y1="81.28" x2="-210.82" y2="81.28" width="0.1524" layer="91"/>
 <label x="-210.82" y="81.28" size="1.778" layer="95"/>
-<pinref part="JP1" gate="G$1" pin="6"/>
+<pinref part="SD_R" gate="G$1" pin="6"/>
 </segment>
 </net>
 <net name="SDA" class="0">
@@ -4808,11 +4746,6 @@ part number 2062-2P from STA</description>
 <wire x1="-231.14" y1="162.56" x2="-218.44" y2="162.56" width="0.1524" layer="91"/>
 <label x="-220.98" y="162.56" size="1.778" layer="95"/>
 </segment>
-<segment>
-<pinref part="9DOF_1" gate="G$1" pin="2"/>
-<wire x1="-60.96" y1="160.02" x2="-55.88" y2="160.02" width="0.1524" layer="91"/>
-<label x="-58.42" y="160.02" size="1.778" layer="95"/>
-</segment>
 </net>
 <net name="NS" class="0">
 <segment>
@@ -4865,9 +4798,14 @@ part number 2062-2P from STA</description>
 </net>
 <net name="3V" class="0">
 <segment>
-<pinref part="JP1" gate="G$1" pin="2"/>
+<pinref part="SD_R" gate="G$1" pin="2"/>
 <wire x1="-198.12" y1="91.44" x2="-210.82" y2="91.44" width="0.1524" layer="91"/>
 <label x="-210.82" y="91.44" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="9DOF_1" gate="G$1" pin="2"/>
+<wire x1="-60.96" y1="160.02" x2="-55.88" y2="160.02" width="0.1524" layer="91"/>
+<label x="-58.42" y="160.02" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>

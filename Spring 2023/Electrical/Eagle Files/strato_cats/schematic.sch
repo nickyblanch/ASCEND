@@ -4485,6 +4485,7 @@ part number 2062-2P from STA</description>
 <part name="GEIGER" library="SparkFun-Connectors" deviceset="CONN_04" device="PTH"/>
 <part name="EXTRA_IO" library="SparkFun-Connectors" deviceset="CONN_06" device="SILK_FEMALE_PTH"/>
 <part name="SD_R" library="adafruit" deviceset="PINHD-1X8" device="BIG"/>
+<part name="EXTRA_IO1" library="SparkFun-Connectors" deviceset="CONN_06" device="SILK_FEMALE_PTH"/>
 </parts>
 <sheets>
 <sheet>
@@ -4530,6 +4531,10 @@ part number 2062-2P from STA</description>
 <instance part="SD_R" gate="G$1" x="-195.58" y="86.36" smashed="yes">
 <attribute name="NAME" x="-201.93" y="97.155" size="5.08" layer="95"/>
 <attribute name="VALUE" x="-201.93" y="71.12" size="1.778" layer="96"/>
+</instance>
+<instance part="EXTRA_IO1" gate="G$1" x="-279.4" y="157.48" smashed="yes">
+<attribute name="VALUE" x="-284.48" y="147.574" size="1.778" layer="96" font="vector"/>
+<attribute name="NAME" x="-284.48" y="168.148" size="5.08" layer="95" font="vector"/>
 </instance>
 </instances>
 <busses>
@@ -4596,6 +4601,11 @@ part number 2062-2P from STA</description>
 <wire x1="-198.12" y1="88.9" x2="-210.82" y2="88.9" width="0.1524" layer="91"/>
 <label x="-210.82" y="88.9" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="EXTRA_IO1" gate="G$1" pin="6"/>
+<wire x1="-274.32" y1="165.1" x2="-261.62" y2="165.1" width="0.1524" layer="91"/>
+<label x="-264.16" y="165.1" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="CS" class="0">
 <segment>
@@ -4658,6 +4668,11 @@ part number 2062-2P from STA</description>
 <wire x1="-60.96" y1="165.1" x2="-55.88" y2="165.1" width="0.1524" layer="91"/>
 <label x="-58.42" y="165.1" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="EXTRA_IO1" gate="G$1" pin="3"/>
+<wire x1="-274.32" y1="157.48" x2="-261.62" y2="157.48" width="0.1524" layer="91"/>
+<label x="-264.16" y="157.48" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="SDO" class="0">
 <segment>
@@ -4709,6 +4724,11 @@ part number 2062-2P from STA</description>
 <wire x1="-60.96" y1="162.56" x2="-55.88" y2="162.56" width="0.1524" layer="91"/>
 <label x="-58.42" y="162.56" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="EXTRA_IO1" gate="G$1" pin="4"/>
+<wire x1="-274.32" y1="160.02" x2="-261.62" y2="160.02" width="0.1524" layer="91"/>
+<label x="-264.16" y="160.02" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="5V" class="0">
 <segment>
@@ -4750,6 +4770,11 @@ part number 2062-2P from STA</description>
 <pinref part="SD_R" gate="G$1" pin="1"/>
 <wire x1="-198.12" y1="93.98" x2="-210.82" y2="93.98" width="0.1524" layer="91"/>
 <label x="-210.82" y="93.98" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="EXTRA_IO1" gate="G$1" pin="5"/>
+<wire x1="-274.32" y1="162.56" x2="-261.62" y2="162.56" width="0.1524" layer="91"/>
+<label x="-264.16" y="162.56" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="NS" class="0">
@@ -4806,6 +4831,35 @@ part number 2062-2P from STA</description>
 <pinref part="9DOF_1" gate="G$1" pin="2"/>
 <wire x1="-60.96" y1="160.02" x2="-55.88" y2="160.02" width="0.1524" layer="91"/>
 <label x="-58.42" y="160.02" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="-73.66" y1="81.28" x2="-68.58" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="ARDUINO" gate="B1" pin="3.3V"/>
+<label x="-76.2" y="81.28" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="D6" class="0">
+<segment>
+<pinref part="ARDUINO" gate="B1" pin="6"/>
+<wire x1="-38.1" y1="53.34" x2="-30.48" y2="53.34" width="0.1524" layer="91"/>
+<label x="-30.48" y="53.34" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="EXTRA_IO1" gate="G$1" pin="1"/>
+<wire x1="-274.32" y1="152.4" x2="-261.62" y2="152.4" width="0.1524" layer="91"/>
+<label x="-264.16" y="152.4" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="D7" class="0">
+<segment>
+<pinref part="ARDUINO" gate="B1" pin="7"/>
+<wire x1="-38.1" y1="55.88" x2="-30.48" y2="55.88" width="0.1524" layer="91"/>
+<label x="-30.48" y="55.88" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="EXTRA_IO1" gate="G$1" pin="2"/>
+<wire x1="-274.32" y1="154.94" x2="-261.62" y2="154.94" width="0.1524" layer="91"/>
+<label x="-264.16" y="154.94" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>

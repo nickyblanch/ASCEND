@@ -4535,7 +4535,7 @@ part number 2062-2P from STA</description>
 <busses>
 </busses>
 <nets>
-<net name="GND" class="1">
+<net name="GND" class="0">
 <segment>
 <pinref part="GRAV" gate="J1" pin="2"/>
 <wire x1="-213.36" y1="15.24" x2="-208.28" y2="15.24" width="0.1524" layer="91"/>

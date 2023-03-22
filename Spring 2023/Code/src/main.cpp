@@ -5,7 +5,7 @@
 #include "def.hpp"
 #include "BME680.hpp"
 #include "ICM20498.hpp"
-#include "MICS.hpp"
+#include "Gravity.hpp"
 #include "GUVA.hpp"
 #include "geiger.hpp"
 
@@ -67,7 +67,6 @@ void loop()
   auto bme_reading = BME::read(log_file);
   auto icm_reading = ICM::read(log_file);
   auto guva_reading = GUVA::read(log_file);
-  auto mics_reading = MICS::read(log_file);
   RAD::read(log_file);
 
   log_file.println(""); // newline

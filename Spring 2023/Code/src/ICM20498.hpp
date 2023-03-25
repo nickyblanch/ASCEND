@@ -23,12 +23,12 @@ namespace ICM
     {
         bool initialized = false;
         int tries = 0;
-        while (!initialized && tries < 6)
+        while (!initialized && tries < 6) 
         {
             icm.begin(Wire);
 
-            Serial.print(F("Initialization of the ICM returned: "));
-            Serial.println(icm.statusString());
+            Serial.print("Initialization of the ICM returned: ");
+            // Serial.println(icm.statusString());
             if (icm.status != ICM_20948_Stat_Ok)
             {
                 Serial.println("Trying again...");

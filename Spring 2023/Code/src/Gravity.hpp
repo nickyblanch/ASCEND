@@ -18,29 +18,36 @@ namespace Gravity{
 
     DFRobot_OzoneSensor Ozone;
 
-        void init(){
-            Serial.begin(9600);
-            while(!Ozone.begin(Ozone_IICAddress)){
-                Serial.println("I2c device number error !");
-                delay(1000);
-            }
-            Serial.println("I2c connect success !");
+    void init()
+    {
+        while(!Ozone.begin(Ozone_IICAddress))
+        {
+            Serial.println("Gravity: I2c device number error !");
+            digitalWrite(LED_PIN, HIGH);
+            delay(1000);
+            digitalWrite(LED_PIN, LOW);
+            delay(1000);
+        }
+        Serial.println("Gravity: I2c connect success !");
 
-            /**
-             * set measuer mode
-             * MEASURE_MODE_AUTOMATIC         active  mode
-             * MEASURE_MODE_PASSIVE           passive mode
-             */
-                Ozone.setModes(MEASURE_MODE_PASSIVE);
-        }
-        int16_t read(File &log_file){
-            /**
-            * Smooth data collection
-            * COLLECT_NUMBER                 The collection range is 1-100
+        /**
+            * set measuer mode
+            * MEASURE_MODE_AUTOMATIC         active  mode
+            * MEASURE_MODE_PASSIVE           passive mode
             */
-            int16_t ozoneConcentration = Ozone.readOzoneData(COLLECT_NUMBER);
-            log_file.print(ozoneConcentration);
-            log_file.print(",");
-            return {ozoneConcentration};
-        }
+        Ozone.setModes(MEASURE_MODE_PASSIVE);
+    }
+    int16_t read(File &log_file){
+        /**
+        * Smooth data collection
+        * COLLECT_NUMBER                 The collection range is 1-100
+        */
+        int16_t ozoneConcentration = Ozone.readOzoneData(COLLECT_NUMBER);
+        log_file.print(ozoneConcentration);
+        log_file.print(",");
+
+        
+        return ozoneConcentration;
+        
+    }
 }

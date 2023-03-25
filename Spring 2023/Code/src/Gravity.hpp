@@ -20,15 +20,18 @@ namespace Gravity{
 
     void init()
     {
-        while(!Ozone.begin(Ozone_IICAddress))
+        int tries = 0;
+        while(!Ozone.begin(Ozone_IICAddress) && tries < 5)
         {
             Serial.println("Gravity: I2c device number error !");
             digitalWrite(LED_PIN, HIGH);
             delay(1000);
             digitalWrite(LED_PIN, LOW);
             delay(1000);
+            tries++;
         }
-        Serial.println("Gravity: I2c connect success !");
+        if (tries == 0)
+            Serial.println("Gravity: I2c connect success !");
 
         /**
             * set measuer mode

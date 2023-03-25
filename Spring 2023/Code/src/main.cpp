@@ -47,7 +47,7 @@ void setup()
   Gravity::init();
 
   // put the meaning of values as headers in the file
-  log_file.println("millis,bmetemp(*C),bmepres(Pa),bmehum(%),bmegas_res(KOhm),bmealt(m),accX (mg),accY (mg),accZ (mg),gyrX (deg/sec),gyrY (deg/sec),gyrZ (deg/sec),magX (uT),magY (uT),magZ (uT),UV [0-1023],NO2[0-1023],CO[0-1023],NH3[0-1023],radiation count,rad count per min,uSv/h,uSv/h error,noise events,ozone concentration");
+  log_file.println("millis,bmetemp(*C),bmepres(Pa),bmehum(%),bmegas_res(KOhm),bmealt(m),accX (mg),accY (mg),accZ (mg),gyrX (deg/sec),gyrY (deg/sec),gyrZ (deg/sec),magX (uT),magY (uT),magZ (uT),UV [0-1023],radiation count,rad count per min,uSv/h,uSv/h error,noise events,ozone concentration,");
   log_file.close();
 }
 

@@ -25,7 +25,14 @@ void setup()
   while (!SD.begin(SD_PIN))
   {
     Serial.println("Failed to initialize SD Card");
-    digitalWrite(LED_PIN, HIGH);
+    // flash led pin rapidly 10 times
+    for (int i = 0; i < 10; i++)
+    {
+      digitalWrite(LED_PIN, HIGH);
+      delay(50);
+      digitalWrite(LED_PIN, LOW);
+      delay(50);
+    }
   }
   Serial.println("Initialized SD Card");
   digitalWrite(LED_PIN, LOW);

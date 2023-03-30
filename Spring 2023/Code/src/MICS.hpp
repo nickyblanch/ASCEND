@@ -19,12 +19,12 @@ namespace MICS
             analogRead(MICS_6814_CO),
             analogRead(MICS_6814_NH3)};
 
-        log_file.print(r.NO2);
-        log_file.print(",");
-        log_file.print(r.CO);
-        log_file.print(",");
-        log_file.print(r.NH3);
-        log_file.print(",");
+        log(r.NO2);
+        log(",");
+        log(r.CO);
+        log(",");
+        log(r.NH3);
+        log(",");
 
         return r;
     }

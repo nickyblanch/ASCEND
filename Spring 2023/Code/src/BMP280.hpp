@@ -55,12 +55,12 @@ namespace BMP
         auto pres = bmp.readPressure();
         auto alt = bmp.readAltitude(SEALEVELPRESSURE_HPA);
 
-        log_file.print(temp);
-        log_file.print(",");
-        log_file.print(pres);
-        log_file.print(",");
-        log_file.print(alt);
-        log_file.print(",");
+        log(temp);
+        log(",");
+        log(pres);
+        log(",");
+        log(alt);
+        log(",");
 
         return {temp, pres, alt};
     }

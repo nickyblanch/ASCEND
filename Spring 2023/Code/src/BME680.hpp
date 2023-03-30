@@ -56,20 +56,20 @@ namespace BME
         if (!bme.performReading())
         {
             Serial.println("Failed to perform reading :(");
-            log_file.print("0,0,0,0,0,");
+            log("0,0,0,0,0,");
             return {};
         }
 
-        log_file.print(bme.temperature);
-        log_file.print(",");
-        log_file.print(bme.pressure);
-        log_file.print(",");
-        log_file.print(bme.humidity);
-        log_file.print(",");
-        log_file.print(bme.gas_resistance / 1000.0);
-        log_file.print(",");
-        log_file.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
-        log_file.print(",");
+        log(bme.temperature);
+        log(",");
+        log(bme.pressure);
+        log(",");
+        log(bme.humidity);
+        log(",");
+        log(bme.gas_resistance / 1000.0);
+        log(",");
+        log(bme.readAltitude(SEALEVELPRESSURE_HPA));
+        log(",");
 
         return {
             bme.temperature,

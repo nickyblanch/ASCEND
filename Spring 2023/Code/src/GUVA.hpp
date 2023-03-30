@@ -10,8 +10,8 @@ namespace GUVA
     measurement read(File &log_file)
     {
         auto reading = analogRead(ADAFRUIT_1918);
-        log_file.print(reading);
-        log_file.print(",");
+        log(reading);
+        log(",");
         return {reading};
     }
 }

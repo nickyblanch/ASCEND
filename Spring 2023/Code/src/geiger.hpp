@@ -1,8 +1,8 @@
 #include "def.hpp"
 #include <RadiationWatch.h>
 
-#define SIGN_PIN 2
-#define NOISE_PIN 3
+#define SIGN_PIN 3
+#define NOISE_PIN 2
 
 namespace RAD
 {
@@ -33,16 +33,16 @@ namespace RAD
   {
     geiger.loop();
 
-    log_file.print(geiger.radiationCount());
-    log_file.print(",");
-    log_file.print(geiger.cpm());
-    log_file.print(",");
-    log_file.print(geiger.uSvh());
-    log_file.print(",");
-    log_file.print(geiger.uSvhError());
-    log_file.print(",");
-    log_file.print(noiseSinceRead);
-    log_file.print(",");
+    log(geiger.radiationCount());
+    log(",");
+    log(geiger.cpm());
+    log(",");
+    log(geiger.uSvh());
+    log(",");
+    log(geiger.uSvhError());
+    log(",");
+    log(noiseSinceRead);
+    log(",");
 
     noiseSinceRead = 0;
   }

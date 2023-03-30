@@ -2,6 +2,8 @@
 #include <SPI.h>
 #include <SD.h>
 
+// #define DEBUG_MODE
+
 #include "def.hpp"
 #include "BME680.hpp"
 #include "ICM20498.hpp"
@@ -34,7 +36,10 @@ void setup()
   {
     Serial.println("Failed to open/create log.txt");
     digitalWrite(LED_PIN, HIGH);
-    delay(500);
+    delay(100);
+    digitalWrite(LED_PIN, LOW);
+    delay(100);
+    log_file = SD.open("log.txt", FILE_WRITE);
   }
   else
   {
@@ -47,7 +52,7 @@ void setup()
   Gravity::init();
 
   // put the meaning of values as headers in the file
-  log_file.println("millis,bmetemp(*C),bmepres(Pa),bmehum(%),bmegas_res(KOhm),bmealt(m),accX (mg),accY (mg),accZ (mg),gyrX (deg/sec),gyrY (deg/sec),gyrZ (deg/sec),magX (uT),magY (uT),magZ (uT),UV [0-1023],radiation count,rad count per min,uSv/h,uSv/h error,noise events,ozone concentration,");
+  log("millis,bmetemp(*C),bmepres(Pa),bmehum(%),bmegas_res(KOhm),bmealt(m),accX (mg),accY (mg),accZ (mg),gyrX (deg/sec),gyrY (deg/sec),gyrZ (deg/sec),magX (uT),magY (uT),magZ (uT),UV [0-1023],radiation count,rad count per min,uSv/h,uSv/h error,noise events,ozone concentration,\n");
   log_file.close();
 }
 
@@ -61,8 +66,8 @@ void loop()
     delay(500);
   }
 
-  log_file.print(millis());
-  log_file.print(",");
+  log(millis());
+  log(",");
   // reading values writes to log
   // could do something with these values if desired
   auto bme_reading = BME::read(log_file);
@@ -71,7 +76,7 @@ void loop()
   RAD::read(log_file);
   auto gravity_reading = Gravity::read(log_file);
 
-  log_file.println(""); // newline
+  log("\n"); // newline
 
   // Serial.println(log_file.getWriteError());
   log_file.close();

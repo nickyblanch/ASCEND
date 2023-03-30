@@ -23,7 +23,7 @@ namespace ICM
     {
         bool initialized = false;
         int tries = 0;
-        while (!initialized && tries < 6) 
+        while (!initialized && tries < 6)
         {
             icm.begin(Wire);
 
@@ -62,31 +62,31 @@ namespace ICM
                 {icm.gyrX(), icm.gyrY(), icm.gyrZ()},
                 {icm.magX(), icm.magY(), icm.magZ()}};
 
-            log_file.print(r.acc.x, 3);
-            log_file.print(",");
-            log_file.print(r.acc.y, 3);
-            log_file.print(",");
-            log_file.print(r.acc.z, 3);
-            log_file.print(",");
-            log_file.print(r.gyr.x, 3);
-            log_file.print(",");
-            log_file.print(r.gyr.y, 3);
-            log_file.print(",");
-            log_file.print(r.gyr.z, 3);
-            log_file.print(",");
-            log_file.print(r.mag.x, 3);
-            log_file.print(",");
-            log_file.print(r.mag.y, 3);
-            log_file.print(",");
-            log_file.print(r.mag.z, 3);
-            log_file.print(",");
+            log(r.acc.x, 3);
+            log(",");
+            log(r.acc.y, 3);
+            log(",");
+            log(r.acc.z, 3);
+            log(",");
+            log(r.gyr.x, 3);
+            log(",");
+            log(r.gyr.y, 3);
+            log(",");
+            log(r.gyr.z, 3);
+            log(",");
+            log(r.mag.x, 3);
+            log(",");
+            log(r.mag.y, 3);
+            log(",");
+            log(r.mag.z, 3);
+            log(",");
 
             return r;
         }
         else
         {
             Serial.println("ICM Data Not Ready!!!");
-            log_file.print("N,N,N,N,N,N,N,N,N,");
+            log("N,N,N,N,N,N,N,N,N,");
             return {};
         }
     }

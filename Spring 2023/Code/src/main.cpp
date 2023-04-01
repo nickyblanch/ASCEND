@@ -88,5 +88,5 @@ void loop()
   // Serial.println(log_file.getWriteError());
   log_file.close();
 
-  delay(200);
+  // delay(200);
 }

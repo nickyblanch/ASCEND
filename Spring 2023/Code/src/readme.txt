@@ -19,3 +19,10 @@ MICS5524 => Analog pin
 1918 => Analog pin
 > UV detection
 > UV Index = V*10
+
+BLINK CODE MEANING!!!
+
+3 short blink -> bme680
+6 long link -> ICM20498
+5 even blink -> Gravity
+Rapid flashing -> SD Card

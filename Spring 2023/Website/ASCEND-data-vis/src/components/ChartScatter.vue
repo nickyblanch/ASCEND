@@ -73,8 +73,8 @@ export default {
         maintainAspectRatio: false,
         plugins: {
           tooltip: {
-            enabled: true
-          }
+            enabled: true,
+          },
         },
         scales: {
           x: {
@@ -84,8 +84,8 @@ export default {
               size: 20,
             },
             grid: {
-              color: 'grey',
-            }
+              color: "grey",
+            },
           },
           y: {
             title: {
@@ -93,8 +93,8 @@ export default {
               text: this.yAxis,
             },
             grid: {
-              color: 'grey',
-            }
+              color: "grey",
+            },
           },
         },
         elements: {

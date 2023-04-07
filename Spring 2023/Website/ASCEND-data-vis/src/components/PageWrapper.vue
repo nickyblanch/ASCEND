@@ -17,21 +17,24 @@
         </v-card> -->
 
         <v-card v-if="data">
-          <v-card-title class="bg-secondary">Select Axis</v-card-title>
+          <v-card-title class="bg-secondary">Select Axes</v-card-title>
           <v-card-text class="mt-4">
             <v-select
+              clearable
               v-model="xAxis"
               :items="Object.keys(data)"
               variant="solo"
               label="X Axis"
             />
             <v-select
+              clearable
               v-model="yAxis"
               :items="Object.keys(data)"
               variant="solo"
               label="Y Axis"
             />
             <v-select
+              clearable
               v-model="zAxis"
               :items="Object.keys(data)"
               variant="solo"
@@ -42,9 +45,9 @@
 
         <!-- <v-spacer /> -->
 
-        <v-card variant="outlined" class="mt-4">
-          <v-card-title>Configuration</v-card-title>
-          <v-card-text>
+        <v-card class="mt-4" variant="outlined">
+          <v-card-title class="">Configuration</v-card-title>
+          <v-card-text class="mt-4">
             <v-select
               class="mr-4"
               v-model="csv_file"
@@ -60,21 +63,27 @@
             </div>
             <v-slider v-model="blurAmount" min="0" max="50" />
             <div class="text-subtitle-1">Derivative: {{ derivative }}</div>
-            <v-slider min="0" max="3" step="1" v-model="derivative" />
+            <v-slider
+              min="0"
+              max="3"
+              step="1"
+              v-model="derivative"
+              :disabled="!!zAxis"
+            />
           </v-card-text>
         </v-card>
       </v-col>
 
       <v-col cols="10">
-        <ChartScatter
+        <!-- <ChartScatter
           v-if="xAxis && yAxis && !zAxis"
           :xAxis="xAxis"
           :yAxis="yAxis"
           :passedData="chartData"
           :line="line"
-        />
+        /> -->
         <Chart3d
-          v-if="xAxis && yAxis && zAxis"
+          v-if="xAxis && yAxis"
           :xAxis="xAxis"
           :yAxis="yAxis"
           :zAxis="zAxis"
@@ -87,7 +96,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch, defineProps } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import { blur } from "d3-array";
 import ChartScatter from "@/components/ChartScatter.vue";
 import Chart3d from "@/components/Chart3d.vue";
@@ -107,6 +116,11 @@ const csv_file = ref("Spring_2023.csv");
 const line = ref(false);
 
 const files = ["Spring_2023.csv", "Fall_2022.csv"];
+
+const updateSmoothing = (newVal) => {
+  console.log(newVal);
+  blurAmount.value = newVal;
+};
 
 const unpackCSV = () => {
   fetch("Data/" + csv_file.value)
@@ -151,14 +165,24 @@ const unpackCSV = () => {
 unpackCSV();
 
 const chartData3d = computed(() => {
-  if (xAxis.value && yAxis.value && zAxis.value) {
-    const xData = data.value[xAxis.value].slice();
-    const yData = data.value[yAxis.value].slice();
-    const zData = data.value[zAxis.value].slice();
+  if (xAxis.value && yAxis.value) {
+    const xData = xAxis.value ? data.value[xAxis.value].slice() : [];
+    const yData = yAxis.value ? data.value[yAxis.value].slice() : [];
+    const zData = zAxis.value ? data.value[zAxis.value].slice() : [];
 
     blur(xData, blurAmount.value);
     blur(yData, blurAmount.value);
     blur(zData, blurAmount.value);
+
+    //do our derivative if the graph is in 2d
+    if (!zAxis.value) {
+      for (let i = 0; i < derivative.value; i++) {
+        for (let j = 0; j < xData.length - 1; j++) {
+          yData[j] = (yData[j + 1] - yData[j]) / (xData[j + 1] - xData[j]);
+        }
+        yData[yData.length - 1] = yData[yData.length - 2];
+      }
+    }
 
     return { x: xData, y: yData, z: zData, minutes: data.value.minutes };
   }

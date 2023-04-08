@@ -47,7 +47,7 @@
 
         <v-card class="mt-4" variant="outlined">
           <v-card-title class="">Configuration</v-card-title>
-          <v-card-text class="mt-4">
+          <v-card-text class="mt-2">
             <v-select
               class="mr-4"
               v-model="csv_file"
@@ -57,7 +57,7 @@
               variant="outlined"
             />
 
-            <v-checkbox label="Lines?" v-model="line" />
+            <v-checkbox label="Lines?" v-model="line" hide-details="auto" />
             <div class="text-subtitle-1">
               Data Smoothing: {{ Math.floor(blurAmount) }}
             </div>
@@ -98,7 +98,7 @@
 <script setup>
 import { ref, onMounted, computed, watch } from "vue";
 import { blur } from "d3-array";
-import ChartScatter from "@/components/ChartScatter.vue";
+// import ChartScatter from "@/components/ChartScatter.vue";
 import Chart3d from "@/components/Chart3d.vue";
 
 // open the file at Data/Fall_2022.csv and read it into a variable

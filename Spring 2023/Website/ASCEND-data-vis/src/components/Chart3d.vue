@@ -21,7 +21,7 @@ const plotData = computed(() => {
           mode: p.line ? "lines" : "markers",
           marker: {
             size: 4,
-            opacity: 0.8,
+            opacity: 1.0,
             color: p.passedData.minutes,
             colorscale: "Picnic",
           },
@@ -60,11 +60,11 @@ const layout = computed(() => {
     plot_bgcolor: "rgba(0,0,0,0)",
     paper_bgcolor: "rgba(0,0,0,0)",
     title: {
-      text: p.yAxis + " vs. " + p.xAxis,
+      text: p.yAxis + " vs. " + p.xAxis + (p.zAxis ? " vs. " + p.zAxis : ""),
       font: {
         color: "#AB2520",
         family: "Courier New, monospace",
-        size: 24,
+        size: 36,
       },
       xref: "paper",
       x: 0.05,

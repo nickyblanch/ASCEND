@@ -20,6 +20,11 @@ MICS5524 => Analog pin
 > UV detection
 > UV Index = V*10
 
+SparkfunSound => 3 Analog Pins
+> Audio
+> Envelope
+> Gate
+
 BLINK CODE MEANING!!!
 
 3 short blink -> bme680

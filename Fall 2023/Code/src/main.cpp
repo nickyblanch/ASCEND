@@ -10,6 +10,7 @@
 #include "Gravity.hpp"
 #include "GUVA.hpp"
 #include "geiger.hpp"
+#include "SparkfunSound.hpp"
 
 #define SD_PIN 53U
 

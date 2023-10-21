@@ -1,3 +1,19 @@
+///////////////////////////////////////////////////////////////
+// UA SEDS ASCEND FALL 2023
+// AUTHORS:
+// PURPOSE: SparkFun Sound Sensor Code !!!
+///////////////////////////////////////////////////////////////
+
+// Initialization function: called one time, sets up Geiger counter
+// Call during setup in main
+
+
+// Get data function
+// Call during loop in main
+
+
+///////////////////////////////////////////////////////////////
+
 #define AUDIO_INPUT_PIN A0
 #define GATE_INPUT_PIN 2
 #define ENVELOPE_INPUT_PIN A1

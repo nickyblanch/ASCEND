@@ -1,8 +1,9 @@
 ///////////////////////////////////////////////////////////////
 // UA SEDS ASCEND FALL 2023
-// AUTHORS:
-// PURPOSE: BME 680 !!!
+// AUTHORS: Nick
+// PURPOSE: SD Card Code !!!
 ///////////////////////////////////////////////////////////////
+#include <SD.h>
 
 // Initialization function: called one time, sets up Geiger counter
 // Call during setup in main

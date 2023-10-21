@@ -2,7 +2,7 @@
 #define GATE_INPUT_PIN 2
 #define ENVELOPE_INPUT_PIN A1
 
-namespace GUVA
+namespace SOUND
 {
     struct measurement
     {

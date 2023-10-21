@@ -3,6 +3,8 @@
 // AUTHORS: Nick
 // PURPOSE: SD Card Code !!!
 ///////////////////////////////////////////////////////////////
+
+#include <SPI.h>
 #include <SD.h>
 
 // Initialization function: called one time, sets up Geiger counter

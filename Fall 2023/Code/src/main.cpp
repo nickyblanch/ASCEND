@@ -3,7 +3,7 @@
 // AUTHORS:
 // PURPOSE: CODE FOR ARGUINO MEGA
 // SENSORS: Geiger Counter                  -> Liora        x
-//          Gravity O3 Sensors              -> Kane         x
+//          Gravity O3 Sensors              -> Kane         
 //          ICM20498 9-DoF IMU              -> Sam          x
 //          GUVA UV Sensors                 -> Max
 //          SparkFun Sound Sensor           -> Sabrina

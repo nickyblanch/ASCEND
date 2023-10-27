@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////
 // UA SEDS ASCEND FALL 2023
-// AUTHORS: Nick
+// AUTHORS: Nicky B
 // PURPOSE: SD Card Code !!!
 ///////////////////////////////////////////////////////////////
 
@@ -33,6 +33,7 @@ namespace uSD {
       Serial.print("Saving: ");
       Serial.println(data);
       myFile.println(data);
+      
       // close the file:
       myFile.close();
       Serial.println("Data saved and file closed.");

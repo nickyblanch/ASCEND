@@ -10,7 +10,7 @@
 
 // Creating RadiationWatch Object for Setup:
 
-RadiationWatch geigerObject;
+extern RadiationWatch geigerObject;
 
 // Initialization function: called one time, sets up Geiger counter
 // Call during setup in main

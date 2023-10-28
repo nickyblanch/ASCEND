@@ -3,14 +3,13 @@
 // AUTHORS:
 // PURPOSE: CODE FOR ARGUINO MEGA
 // SENSORS: Geiger Counter                  -> Liora        x
-//          Gravity O3 Sensors              -> Kane         
+//          Gravity O3 Sensors              -> Kane
 //          ICM20498 9-DoF IMU              -> Sam          x
 //          GUVA UV Sensors                 -> Max
-//          SparkFun Sound Sensor           -> Sabrina
+//          SparkFun Sound Sensor           -> Sabrina (Colin)
 //          BME680 Temp,Press,etc. Sensor   -> Razak
 //          SD Card Reader/Writer           -> Nick         x
 ///////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////
 // Arduino Library Files
@@ -40,20 +39,22 @@
 File myFile;
 RadiationWatch geigerObject;
 
-
 ///////////////////////////////////////////////////////////////
 // Setup function
 //
 // Runs once!
 ///////////////////////////////////////////////////////////////
 
-void setup() {
-  // Initialize sensors
-  // ...
+void setup()
+{
+    // Initialize sensors
+    // ...
 
-  // Setup variables
-  // ...
- 
+    // Setup variables
+    // ...
+
+    // SETUP SENSORS
+    SOUND::setup();
 }
 
 ///////////////////////////////////////////////////////////////
@@ -62,11 +63,13 @@ void setup() {
 // Runs forever!
 ///////////////////////////////////////////////////////////////
 
-void loop() {
-  // Get data from sensors
-  // ...
+void loop()
+{
+    // Get data from sensors
+    // ...
 
-  // Write data to file
-  // ...
-  
+    // Write data to file
+    // ...
+
+    SOUND::read();
 }

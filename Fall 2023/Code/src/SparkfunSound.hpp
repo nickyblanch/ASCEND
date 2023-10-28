@@ -7,12 +7,12 @@
 // Initialization function: called one time, sets up Geiger counter
 // Call during setup in main
 
-
 // Get data function
 // Call during loop in main
 
-
 ///////////////////////////////////////////////////////////////
+
+#include "SD.hpp"
 
 #define AUDIO_INPUT_PIN A0
 #define GATE_INPUT_PIN 2
@@ -22,19 +22,34 @@ namespace SOUND
 {
     struct measurement
     {
-        int audio;
-        int envelope;
-        int gate; // value: [0, 1023] = [0v, 5v]
+        int audio;    // value: [0, 1023] [0, 5V]
+        int envelope; // value: [0, 1023] [0, 5V]
+        int gate;     // value: [0, 1] boolean
     };
 
-    measurement read(File &log_file)
+    void setup()
+    {
+        setPinMode(AUDIO_INPUT_PIN, INPUT);
+        setPinMode(GATE_INPUT_PIN, INPUT);
+        setPinMode(ENVELOPE_INPUT_PIN, INPUT);
+    }
+
+    measurement read()
     {
         measurement reading = {
             analogRead(AUDIO_INPUT_PIN),
             analogRead(ENVELOPE_INPUT_PIN),
             digitalRead(GATE_INPUT_PIN)};
+
         log(reading.audio);
         log(",");
+
+        log(reading.envelope);
+        log(",");
+
+        log(reading.gate);
+        log(",");
+
         return reading;
     }
 }

@@ -1,11 +1,31 @@
 ///////////////////////////////////////////////////////////////
 // UA SEDS ASCEND FALL 2023
-// AUTHORS:
+// AUTHORS: Maximo
 // PURPOSE: GUVA UV Sensor Code !!!
 ///////////////////////////////////////////////////////////////
 
-// Initialization function: called one time, sets up Geiger counter
 // Call during setup in main
 
 // Get data function
 // Call during loop in main
+#include "SD.hpp"
+
+#define GUVA_INPUT_PIN A2
+
+namespace GUVA
+{
+  void setup()
+  {
+    pinMode(GUVA_INPUT_PIN, INPUT);
+  }
+
+  int read()
+  {
+    int reading = analogRead(GUVA_INPUT_PIN);
+    log(reading);
+    log(",");
+
+    return reading;
+  }
+
+}

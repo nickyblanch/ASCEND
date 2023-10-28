@@ -55,6 +55,7 @@ void setup()
 
     // SETUP SENSORS
     SOUND::setup();
+    GUVA::setup();
 }
 
 ///////////////////////////////////////////////////////////////
@@ -72,4 +73,5 @@ void loop()
     // ...
 
     SOUND::read();
+    GUVA::read();
 }

@@ -38,6 +38,7 @@
 
 File myFile;
 RadiationWatch geigerObject;
+DFRobot_OzoneSensor Ozone;
 
 ///////////////////////////////////////////////////////////////
 // Setup function

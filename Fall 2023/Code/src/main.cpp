@@ -3,11 +3,11 @@
 // AUTHORS:
 // PURPOSE: CODE FOR ARGUINO MEGA
 // SENSORS: Geiger Counter                  -> Liora        x
-//          Gravity O3 Sensors              -> Kane
+//          Gravity O3 Sensors              -> Kane         x
 //          ICM20498 9-DoF IMU              -> Sam          x
 //          GUVA UV Sensors                 -> Max
 //          SparkFun Sound Sensor           -> Sabrina (Colin)
-//          BME680 Temp,Press,etc. Sensor   -> Razak
+//          BME680 Temp,Press,etc. Sensor   -> Razakv       x
 //          SD Card Reader/Writer           -> Nick         x
 ///////////////////////////////////////////////////////////////
 
@@ -25,6 +25,7 @@
 
 #include "def.hpp"
 #include "BME680.hpp"
+#include "BME680_2.hpp"
 #include "ICM20498.hpp"
 #include "Gravity.hpp"
 #include "GUVA.hpp"
@@ -57,7 +58,8 @@ void setup()
     // SETUP SENSORS
     SOUND::setup();
     GUVA::setup();
-    
+    BME::setup();
+    BME2::setup();
 }
 
 ///////////////////////////////////////////////////////////////
@@ -76,4 +78,6 @@ void loop()
 
     SOUND::read();
     GUVA::read();
+    BME::read();
+    BME2::read();
 }

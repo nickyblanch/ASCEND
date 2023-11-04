@@ -16,3 +16,4 @@
 #else
 #define log uSD::write_data
 #endif
+#define LED_PIN 5

@@ -5,14 +5,15 @@
 ///////////////////////////////////////////////////////////////
 #include "Adafruit_BME680.h"
 #include "def.hpp"
+#include "SD.hpp"
 
-Adafruit_BME680 bme;
+Adafruit_BME680 bme2;
 
 #define SEALEVELPRESSURE_HPA (1013.25)
 
 // Initialization function: called one time, sets up Geiger counter
 // Call during setup in main
-namespace BME
+namespace BME2
 {
   struct measurement
   {
@@ -28,7 +29,7 @@ namespace BME
     bool inited = false;
     while (!inited && i < 3)
     {
-      if (bme.begin())
+      if (bme2.begin())
       {
         inited = true;
         Serial.println("Initialized BME680");
@@ -50,29 +51,29 @@ namespace BME
       delay(2000);
     }
 
-    bme.setTemperatureOversampling(BME680_OS_8X);
-    bme.setHumidityOversampling(BME680_OS_2X);
-    bme.setPressureOversampling(BME680_OS_4X);
-    bme.setIIRFilterSize(BME680_FILTER_SIZE_3);
-    bme.setGasHeater(320, 150); // 320*C for 150 mss
+    bme2.setTemperatureOversampling(BME680_OS_8X);
+    bme2.setHumidityOversampling(BME680_OS_2X);
+    bme2.setPressureOversampling(BME680_OS_4X);
+    bme2.setIIRFilterSize(BME680_FILTER_SIZE_3);
+    bme2.setGasHeater(320, 150); // 320*C for 150 mss
   }
   void read()
   {
-    if (!bme.performReading())
+    if (!bme2.performReading())
     {
       Serial.println("Failed to perform reading :(");
       log("0,0,0,0,0,");
     }
 
-    log(bme.temperature);
+    log(bme2.temperature);
     log(",");
-    log(float(bme.pressure));
+    log(float(bme2.pressure));
     log(",");
-    log(bme.humidity);
+    log(bme2.humidity);
     log(",");
-    log(float(bme.gas_resistance / 1000.0));
+    log(float(bme2.gas_resistance / 1000.0));
     log(",");
-    log(bme.readAltitude(SEALEVELPRESSURE_HPA));
+    log(bme2.readAltitude(SEALEVELPRESSURE_HPA));
     log(",");
   }
 }

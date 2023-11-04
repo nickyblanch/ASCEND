@@ -16,7 +16,8 @@ ICM_20948_I2C myICM; // Otherwise create an ICM_20948_I2C object
 // Initialization function: called one time, sets up Geiger counter
 // Call during setup in main
 
-void setup_IMU(void) {
+void setup_IMU(void)
+{
 
   // Setup I2C port
   WIRE_PORT.begin();
@@ -26,7 +27,8 @@ void setup_IMU(void) {
   bool initialized = false;
 
   // Looping forever until sensor is successfully initialized
-  while (!initialized) {
+  while (!initialized)
+  {
 
     // Try to initialize sensor
     myICM.begin(WIRE_PORT, AD0_VAL);
@@ -42,17 +44,23 @@ void setup_IMU(void) {
     else
     {
       initialized = true;
+      // PUT HEADERS IN CSV FILE
+      Serial.print("Scaled. Acc.X, Scaled. Acc.Y, Scaled. Acc.Z, ");
+      Serial.print("Gyr.X, Gyr.Y, Gyr.Z, ");
+      Serial.print("Mag.X, Mag.Y, Mag.Z, ");
+      Serial.print("Tmp, ");
     }
   }
-
 }
 
 // Get data function
 // Call during loop in main
 
-void data_IMU (void) {
+void data_IMU(void)
+{
 
-  if (myICM.dataReady()) {
+  if (myICM.dataReady())
+  {
     myICM.getAGMT();         // The values are only updated when you call 'getAGMT'
     printScaledAGMT(&myICM); // This function takes into account the scale settings from when the measurement was made to calculate the values with units
     delay(30);
@@ -61,32 +69,30 @@ void data_IMU (void) {
   {
     Serial.println("Waiting for IMU data");
   }
-
 }
 
-float* printScaledAGMT(ICM_20948_I2C *sensor) {
+float *printScaledAGMT(ICM_20948_I2C *sensor)
+{
 
-  Serial.print("Scaled. Acc (mg) [ ");
-  printFormattedFloat(sensor->accX(), 5, 2);
+  log(sensor->accX());
   Serial.print(", ");
-  printFormattedFloat(sensor->accY(), 5, 2);
+  log(sensor->accY());
   Serial.print(", ");
-  printFormattedFloat(sensor->accZ(), 5, 2);
-  Serial.print(" ], Gyr (DPS) [ ");
-  printFormattedFloat(sensor->gyrX(), 5, 2);
+  log(sensor->accZ());
   Serial.print(", ");
-  printFormattedFloat(sensor->gyrY(), 5, 2);
+  log(sensor->gyrX());
   Serial.print(", ");
-  printFormattedFloat(sensor->gyrZ(), 5, 2);
-  Serial.print(" ], Mag (uT) [ ");
-  printFormattedFloat(sensor->magX(), 5, 2);
+  log(sensor->gyrY());
   Serial.print(", ");
-  printFormattedFloat(sensor->magY(), 5, 2);
+  log(sensor->gyrZ());
   Serial.print(", ");
-  printFormattedFloat(sensor->magZ(), 5, 2);
-  Serial.print(" ], Tmp (C) [ ");
-  printFormattedFloat(sensor->temp(), 5, 2);
-  Serial.print(" ]");
+  log(sensor->magX());
+  Serial.print(", ");
+  log(sensor->magY());
+  Serial.print(", ");
+  log(sensor->magZ());
+  Serial.print(", ");
+  log(sensor->temp());
+  Serial.print(", ");
   Serial.println();
-
 }

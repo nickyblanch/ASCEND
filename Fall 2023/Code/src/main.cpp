@@ -5,7 +5,7 @@
 // SENSORS: Geiger Counter                  -> Liora        x
 //          Gravity O3 Sensors              -> Kane         x
 //          ICM20498 9-DoF IMU              -> Sam          x
-//          GUVA UV Sensors                 -> Max
+//          GUVA UV Sensors                 -> Max          x
 //          SparkFun Sound Sensor           -> Sabrina (Colin)
 //          BME680 Temp,Press,etc. Sensor   -> Razakv       x
 //          SD Card Reader/Writer           -> Nick         x
@@ -60,6 +60,7 @@ void setup()
     GUVA::setup();
     BME::setup();
     BME2::setup();
+    setup_IMU();
 }
 
 ///////////////////////////////////////////////////////////////
@@ -80,4 +81,5 @@ void loop()
     GUVA::read();
     BME::read();
     BME2::read();
+    data_IMU();
 }

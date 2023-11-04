@@ -61,6 +61,7 @@ void setup()
     BME::setup();
     BME2::setup();
     setup_IMU();
+    SOUND::setup();
 }
 
 ///////////////////////////////////////////////////////////////
@@ -82,4 +83,5 @@ void loop()
     BME::read();
     BME2::read();
     data_IMU();
+    SOUND::read();
 }

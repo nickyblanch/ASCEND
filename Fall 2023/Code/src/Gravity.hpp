@@ -24,6 +24,7 @@ namespace OZONE
         }
         Serial.println("I2c connect success !");
         Ozone.setModes(MEASURE_MODE_PASSIVE);
+        log("Ozone (PPB.), ");
     }
 
     // Get data function

@@ -34,6 +34,9 @@ namespace BME2
         inited = true;
         Serial.println("Initialized BME680");
         digitalWrite(LED_PIN, LOW);
+
+        // HEADERS
+        log("BME_2_Temp, BME_2_Pres, BME_2_Hum, BME_2_Res, BME_2_Alt, ");
       }
       else
       {

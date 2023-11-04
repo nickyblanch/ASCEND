@@ -17,6 +17,7 @@ namespace GUVA
   void setup()
   {
     pinMode(GUVA_INPUT_PIN, INPUT);
+    log("UV [0-1023], ");
   }
 
   int read()

@@ -32,9 +32,12 @@ namespace SOUND
         setPinMode(AUDIO_INPUT_PIN, INPUT);
         setPinMode(GATE_INPUT_PIN, INPUT);
         setPinMode(ENVELOPE_INPUT_PIN, INPUT);
+
+        // HEADERS
+        log("Audio, Envelope, Gate, ");
     }
 
-    measurement read()
+    void read()
     {
         measurement reading = {
             analogRead(AUDIO_INPUT_PIN),
@@ -49,7 +52,5 @@ namespace SOUND
 
         log(reading.gate);
         log(",");
-
-        return reading;
     }
 }

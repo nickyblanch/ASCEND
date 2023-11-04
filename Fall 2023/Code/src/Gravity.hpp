@@ -3,38 +3,49 @@
 // AUTHORS:
 // PURPOSE: Gravity O3 Sensor Code !!!
 ///////////////////////////////////////////////////////////////
-#define COLLECT_NUMBER 20 
-#define Ozone_IICAddress Ozone_ADDRESS_3
+#include "DFRobot_OzoneSensor.h"
+#include "SD.hpp"
+#include "def.hpp"
+
+#define COLLECT_NUMBER 20
+#define Ozone_IICAddress OZONE_ADDRESS_3
 extern DFRobot_OzoneSensor Ozone;
 // Initialization function: called one time, sets up Geiger counter
 // Call during setup in main
-void setup_o3(void) 
+namespace OZONE
 {
-while(!Ozone.begin(Ozone_IICAddress)) {
-serial.println("I2c device number error !");
-delay(1000);
-} Serial.println("I2c connect success !");
-Ozone.SetModes(MEASURE_MODE_PASSIVE);
-}
 
-// Get data function
-// Call during loop in main
+    void setup_o3(void)
+    {
+        while (!Ozone.begin(Ozone_IICAddress))
+        {
+            Serial.println("I2c device number error !");
+            delay(1000);
+        }
+        Serial.println("I2c connect success !");
+        Ozone.setModes(MEASURE_MODE_PASSIVE);
+    }
 
-void get_o3_data(void){
-int16_t ozoneData = Ozone.ReadOzoneData(COLLECT_NUMBER);
-Serial.print("Ozone Data is ");
-Serial.print(ozoneData);
-Serial.println(" PPB. ");
+    // Get data function
+    // Call during loop in main
 
-int status = write_data(ozoneData);
-int status2 = write_data(", ");
+    void get_o3_data(void)
+    {
+        int16_t ozoneData = Ozone.readOzoneData(COLLECT_NUMBER);
+        Serial.print("Ozone Data is ");
+        Serial.print(ozoneData);
+        Serial.println(" PPB. ");
 
-if (status == 1) 
-{
-    //everything is good
-}
-else
-{
-    //Turn error LED
-}
+        int status = log(ozoneData);
+        int status2 = log(", ");
+
+        if (status == 1)
+        {
+            // everything is good
+        }
+        else
+        {
+            // Turn error LED
+        }
+    }
 }

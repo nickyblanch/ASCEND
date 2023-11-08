@@ -11,6 +11,8 @@
 // Call during loop in main
 
 // Allows switching between writing to the SD card and printing to Serial
+#include "SD.hpp"
+
 #ifdef DEBUG_MODE
 #define log Serial.print
 #else

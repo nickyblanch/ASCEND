@@ -38,11 +38,13 @@ namespace uSD
       // close the file:
       myFile.close();
       Serial.println("Data saved and file closed.");
+      return 0;
     }
     else
     {
       // if the file didn't open, print an error:
       Serial.println("Error opening test.txt");
+      return 1;
     }
   }
 

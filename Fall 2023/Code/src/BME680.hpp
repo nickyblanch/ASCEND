@@ -28,7 +28,7 @@ namespace BME
     bool inited = false;
     while (!inited && i < 3)
     {
-      if (bme.begin())
+      if (bme.begin(BME68X_I2C_ADDR_HIGH))
       {
         inited = true;
         Serial.println("Initialized BME680");

@@ -16,7 +16,7 @@ ICM_20948_I2C myICM; // Otherwise create an ICM_20948_I2C object
 // Initialization function: called one time, sets up Geiger counter
 // Call during setup in main
 
-void setup_IMU(void)
+void setup_IMU()
 {
 
   // Setup I2C port
@@ -45,16 +45,40 @@ void setup_IMU(void)
     {
       initialized = true;
       // PUT HEADERS IN CSV FILE
-      Serial.print("Scaled. Acc.X, Scaled. Acc.Y, Scaled. Acc.Z, ");
-      Serial.print("Gyr.X, Gyr.Y, Gyr.Z, ");
-      Serial.print("Mag.X, Mag.Y, Mag.Z, ");
-      Serial.print("Tmp, ");
+      log("Scaled. Acc.X, Scaled. Acc.Y, Scaled. Acc.Z, ");
+      log("Gyr.X, Gyr.Y, Gyr.Z, ");
+      log("Mag.X, Mag.Y, Mag.Z, ");
+      log("Tmp, ");
     }
   }
 }
 
 // Get data function
 // Call during loop in main
+void printScaledAGMT(ICM_20948_I2C *sensor)
+{
+
+  log(sensor->accX());
+  log(", ");
+  log(sensor->accY());
+  log(", ");
+  log(sensor->accZ());
+  log(", ");
+  log(sensor->gyrX());
+  log(", ");
+  log(sensor->gyrY());
+  log(", ");
+  log(sensor->gyrZ());
+  log(", ");
+  log(sensor->magX());
+  log(", ");
+  log(sensor->magY());
+  log(", ");
+  log(sensor->magZ());
+  log(", ");
+  log(sensor->temp());
+  log(", ");
+}
 
 void data_IMU(void)
 {
@@ -68,31 +92,6 @@ void data_IMU(void)
   else
   {
     Serial.println("Waiting for IMU data");
+    log("NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ");
   }
-}
-
-float *printScaledAGMT(ICM_20948_I2C *sensor)
-{
-
-  log(sensor->accX());
-  Serial.print(", ");
-  log(sensor->accY());
-  Serial.print(", ");
-  log(sensor->accZ());
-  Serial.print(", ");
-  log(sensor->gyrX());
-  Serial.print(", ");
-  log(sensor->gyrY());
-  Serial.print(", ");
-  log(sensor->gyrZ());
-  Serial.print(", ");
-  log(sensor->magX());
-  Serial.print(", ");
-  log(sensor->magY());
-  Serial.print(", ");
-  log(sensor->magZ());
-  Serial.print(", ");
-  log(sensor->temp());
-  Serial.print(", ");
-  Serial.println();
 }

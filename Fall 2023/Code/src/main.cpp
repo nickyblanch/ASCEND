@@ -2,13 +2,13 @@
 // UA SEDS ASCEND FALL 2023
 // AUTHORS:
 // PURPOSE: CODE FOR ARGUINO MEGA
-// SENSORS: Geiger Counter                  -> Liora        x
-//          Gravity O3 Sensors              -> Kane         x
-//          ICM20498 9-DoF IMU              -> Sam          x
-//          GUVA UV Sensors                 -> Max          x
-//          SparkFun Sound Sensor           -> Sabrina (Colin)
-//          BME680 Temp,Press,etc. Sensor   -> Razakv       x
-//          SD Card Reader/Writer           -> Nick         x
+// SENSORS: Geiger Counter                  -> Liora        x  Pins done
+//          Gravity O3 Sensors              -> Kane         x  I2C
+//          ICM20498 9-DoF IMU              -> Sam          x  I2C
+//          GUVA UV Sensors                 -> Max          x  Pins Done
+//          SparkFun Sound Sensor           -> Sabrina (Colin) Manual Pins required
+//          BME680 Temp,Press,etc. Sensor   -> Razakv       x  I2C
+//          SD Card Reader/Writer           -> Nick         x  SPI
 ///////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////
@@ -22,6 +22,8 @@
 ///////////////////////////////////////////////////////////////
 // Custom files
 ///////////////////////////////////////////////////////////////
+
+// #define DEBUG_MODE
 
 #include "def.hpp"
 #include "BME680.hpp"
@@ -62,6 +64,7 @@ void setup()
     BME2::setup();
     setup_IMU();
     SOUND::setup();
+    GEIGER::setup();
 }
 
 ///////////////////////////////////////////////////////////////
@@ -84,4 +87,7 @@ void loop()
     BME2::read();
     data_IMU();
     SOUND::read();
+    GEIGER::loop();
+
+    log("\n");
 }

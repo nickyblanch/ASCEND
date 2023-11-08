@@ -29,7 +29,7 @@ namespace BME2
     bool inited = false;
     while (!inited && i < 3)
     {
-      if (bme2.begin(BME68X_I2C_ADDR_HIGH)) // CHECK THIS LINE
+      if (bme2.begin(BME68X_I2C_ADDR_LOW)) // CHECK THIS LINE
       {
         inited = true;
         Serial.println("Initialized BME680");

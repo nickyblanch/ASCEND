@@ -7,6 +7,8 @@
 #ifndef SD_CARD
 #define SD_CARD
 
+#define SD_PIN 53U
+
 #include <SPI.h>
 #include <SD.h>
 

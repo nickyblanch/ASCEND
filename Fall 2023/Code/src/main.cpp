@@ -18,12 +18,13 @@
 #include <Arduino.h>
 #include <SPI.h>
 #include <SD.h>
+#include <Wire.h>
 
 ///////////////////////////////////////////////////////////////
 // Custom files
 ///////////////////////////////////////////////////////////////
 
-// #define DEBUG_MODE
+#define DEBUG_MODE
 
 #include "def.hpp"
 #include "BME680.hpp"
@@ -51,20 +52,24 @@ DFRobot_OzoneSensor Ozone;
 
 void setup()
 {
-    // Initialize sensors
-    // ...
+    Serial.begin(9600);
+    Serial.println("Begin boot sequence!");
 
-    // Setup variables
-    // ...
+    Wire.begin();
+    Wire.setClock(400000);
+
+    uSD::setup();
 
     // SETUP SENSORS
-    SOUND::setup();
-    GUVA::setup();
-    BME::setup();
-    BME2::setup();
-    setup_IMU();
-    SOUND::setup();
-    GEIGER::setup();
+    // SOUND::setup();
+    // GUVA::setup();
+    // BME::setup();
+    // BME2::setup();
+    // setup_IMU();
+    // GEIGER::setup();
+    OZONE::setup_o3();
+
+    Serial.println("End of setup!");
 }
 
 ///////////////////////////////////////////////////////////////
@@ -81,13 +86,13 @@ void loop()
     // Write data to file
     // ...
 
-    SOUND::read();
-    GUVA::read();
-    BME::read();
-    BME2::read();
-    data_IMU();
-    SOUND::read();
-    GEIGER::loop();
+    // SOUND::read();
+    // GUVA::read();
+    // BME::read();
+    // BME2::read();
+    // data_IMU();
+    // GEIGER::loop();
+    OZONE::get_o3_data();
 
     log("\n");
 }

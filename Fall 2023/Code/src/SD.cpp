@@ -12,11 +12,11 @@ namespace uSD
   int setup()
   {
 
-    Serial.print("Initializing SD card...");
+    Serial.println("Initializing SD card...");
 
-    if (!SD.begin(4))
+    if (!SD.begin(SD_PIN))
     {
-      Serial.println("initialization failed!");
+      Serial.println("SD: initialization failed!");
       return -1;
     }
     Serial.println("SD initialization done.");
@@ -31,13 +31,13 @@ namespace uSD
     // if the file opened okay, write to it:
     if (myFile)
     {
-      Serial.print("Saving: ");
-      Serial.println(data);
+      // Serial.print("Saving: ");
+      // Serial.println(data);
       myFile.println(data);
 
       // close the file:
       myFile.close();
-      Serial.println("Data saved and file closed.");
+      // Serial.println("Data saved and file closed.");
       return 0;
     }
     else

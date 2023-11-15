@@ -2,7 +2,7 @@
 #include <SPI.h>
 #include <SD.h>
 
-// #define DEBUG_MODE
+#define DEBUG_MODE
 
 #include "def.hpp"
 #include "BME680.hpp"

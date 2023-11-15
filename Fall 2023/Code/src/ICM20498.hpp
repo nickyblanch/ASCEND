@@ -20,8 +20,8 @@ void setup_IMU()
 {
 
   // Setup I2C port
-  WIRE_PORT.begin();
-  WIRE_PORT.setClock(400000);
+  // WIRE_PORT.begin();
+  // WIRE_PORT.setClock(400000);
 
   // Track if IMU is successfully initialized or not
   bool initialized = false;
@@ -31,7 +31,7 @@ void setup_IMU()
   {
 
     // Try to initialize sensor
-    myICM.begin(WIRE_PORT, AD0_VAL);
+    myICM.begin(WIRE_PORT);
 
     // Checking if sensor is initialized or not
     Serial.print(F("Initialization of the sensor returned: "));

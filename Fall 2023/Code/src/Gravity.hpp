@@ -19,10 +19,10 @@ namespace OZONE
     {
         while (!Ozone.begin(Ozone_IICAddress))
         {
-            Serial.println("I2c device number error !");
+            Serial.println("Gravity: I2c device number error !");
             delay(1000);
         }
-        Serial.println("I2c connect success !");
+        Serial.println("Gravity: I2c connect success !");
         Ozone.setModes(MEASURE_MODE_PASSIVE);
         log("Ozone (PPB.), ");
     }
@@ -33,9 +33,9 @@ namespace OZONE
     void get_o3_data(void)
     {
         int16_t ozoneData = Ozone.readOzoneData(COLLECT_NUMBER);
-        Serial.print("Ozone Data is ");
-        Serial.print(ozoneData);
-        Serial.println(" PPB. ");
+        // Serial.print("Ozone Data is ");
+        // Serial.print(ozoneData);
+        // Serial.println(" PPB. ");
 
         int status = log(ozoneData);
         int status2 = log(", ");

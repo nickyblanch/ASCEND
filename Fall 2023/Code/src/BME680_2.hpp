@@ -32,7 +32,7 @@ namespace BME2
       if (bme2.begin(BME68X_I2C_ADDR_LOW)) // CHECK THIS LINE
       {
         inited = true;
-        Serial.println("Initialized BME680");
+        Serial.println("Initialized BME680_2");
         digitalWrite(LED_PIN, LOW);
 
         // HEADERS

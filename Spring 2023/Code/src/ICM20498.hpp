@@ -28,7 +28,7 @@ namespace ICM
             icm.begin(Wire);
 
             Serial.println("Initialization of the ICM returned: ");
-            // Serial.println(icm.statusString());
+            Serial.println(icm.statusString());
             if (icm.status != ICM_20948_Stat_Ok)
             {
                 Serial.println("Trying again...");

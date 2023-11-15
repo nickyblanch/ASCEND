@@ -13,9 +13,15 @@
 // Allows switching between writing to the SD card and printing to Serial
 #include "SD.hpp"
 
+#ifndef DEFINITIONS
+#define DEFINITIONS
+
+// Switch between serial and sd card writing based on DEBUG_MODE
 #ifdef DEBUG_MODE
 #define log Serial.print
 #else
 #define log uSD::write_data
 #endif
-#define LED_PIN 5
+
+#define LED_PIN 28
+#endif

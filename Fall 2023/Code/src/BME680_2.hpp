@@ -42,9 +42,9 @@ namespace BME2
       {
         Serial.println("Could not detect BME680 sensor, please check wiring!");
         digitalWrite(LED_PIN, HIGH);
-        delay(100);
-        digitalWrite(LED_PIN, LOW);
         delay(400);
+        digitalWrite(LED_PIN, LOW);
+        delay(100);
       }
       i++;
     }
@@ -64,8 +64,9 @@ namespace BME2
   {
     if (!bme2.performReading())
     {
-      Serial.println("Failed to perform reading :(");
-      log("0,0,0,0,0,");
+      Serial.println("Failed to perform reading :(. Trying to connect again...");
+      setup();
+      return;
     }
 
     log(bme2.temperature);

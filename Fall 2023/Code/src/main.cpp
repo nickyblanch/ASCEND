@@ -59,6 +59,8 @@ void setup()
     Wire.begin();
     Wire.setClock(400000);
 
+    setPinMode(LED_PIN, OUTPUT);
+
     uSD::setup();
 
     // SETUP SENSORS

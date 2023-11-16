@@ -26,8 +26,9 @@ void setup_IMU()
   // Track if IMU is successfully initialized or not
   bool initialized = false;
 
-  // Looping forever until sensor is successfully initialized
-  while (!initialized)
+  int tries = 0;
+  // Looping 6 times until sensor is successfully initialized
+  while (!initialized && tries < 6)
   {
 
     // Try to initialize sensor
@@ -39,7 +40,11 @@ void setup_IMU()
     if (myICM.status != ICM_20948_Stat_Ok)
     {
       Serial.println("Trying again...");
-      delay(500);
+      digitalWrite(LED_PIN, HIGH);
+      delay(400);
+      digitalWrite(LED_PIN, LOW);
+      delay(100);
+      tries++;
     }
     else
     {
@@ -91,7 +96,7 @@ void data_IMU(void)
   }
   else
   {
-    Serial.println("Waiting for IMU data");
-    log("NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ");
+    Serial.println("Failed to get data from IMU, trying to setup");
+    setup_IMU();
   }
 }

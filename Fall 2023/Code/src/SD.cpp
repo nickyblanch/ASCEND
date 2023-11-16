@@ -14,11 +14,16 @@ namespace uSD
 
     Serial.println("Initializing SD card...");
 
-    if (!SD.begin(SD_PIN))
+    while (!SD.begin(SD_PIN))
     {
       Serial.println("SD: initialization failed!");
-      digitalWrite(LED_PIN, HIGH);
-      return -1;
+      for (int i = 0; i < 10; i++)
+      {
+        digitalWrite(LED_PIN, HIGH);
+        delay(100);
+        digitalWrite(LED_PIN, LOW);
+        delay(100);
+      }
     }
     int file_num = 0;
 
@@ -38,7 +43,7 @@ namespace uSD
     myFile = SD.open(filename, FILE_WRITE);
 
     Serial.println("SD initialization done.");
-    return 1;
+    return 0;
   }
 
   int loop()
@@ -50,6 +55,14 @@ namespace uSD
     {
       Serial.print("I have no mouth and I must scream (couldnt open): ");
       Serial.println(filename);
+
+      for (int i = 0; i < 10; i++)
+      {
+        digitalWrite(LED_PIN, HIGH);
+        delay(100);
+        digitalWrite(LED_PIN, LOW);
+        delay(100);
+      }
       return 1;
     }
     return 0;

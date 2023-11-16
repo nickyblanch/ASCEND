@@ -1,8 +1,3 @@
-MICS-6814 => Analog Pins
-> NO2
-> CO
-> NH3
-
 BME680 => i2p through library
 > Temp
 > Humidity
@@ -27,7 +22,8 @@ SparkfunSound => 3 Analog Pins
 
 BLINK CODE MEANING!!!
 
-3 short blink -> bme680
+3 short blink -> bme680_1
+3 long blink -> bme680_2
 6 long link -> ICM20498
-5 even blink -> Gravity
+4 even blink -> Gravity (Ozone)
 Rapid flashing -> SD Card

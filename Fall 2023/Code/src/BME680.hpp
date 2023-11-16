@@ -69,7 +69,7 @@ namespace BME
 
     log(bme.temperature);
     log(",");
-    log(float(bme.pressure));
+    log(int(bme.pressure));
     log(",");
     log(bme.humidity);
     log(",");

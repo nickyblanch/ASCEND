@@ -17,33 +17,55 @@ namespace uSD
     if (!SD.begin(SD_PIN))
     {
       Serial.println("SD: initialization failed!");
+      digitalWrite(LED_PIN, HIGH);
       return -1;
     }
+    int file_num = 0;
+
+    // Sequentially check for the next available file name
+    sprintf(filename, "test%d.txt", file_num);
+    while (SD.exists(filename))
+    {
+      Serial.print(filename);
+      Serial.println(" exists, trying next");
+
+      file_num++;
+      sprintf(filename, "test%d.txt", file_num);
+    }
+
+    Serial.print("Unnused file name found: ");
+    Serial.println(filename);
+    myFile = SD.open(filename, FILE_WRITE);
+
     Serial.println("SD initialization done.");
     return 1;
   }
 
+  int loop()
+  {
+    // close and repoen the file to allow for writing
+    myFile.close();
+    myFile = SD.open(filename, FILE_WRITE);
+    if (!myFile)
+    {
+      Serial.print("I have no mouth and I must scream (couldnt open): ");
+      Serial.println(filename);
+      return 1;
+    }
+    return 0;
+  }
+
   int write_data(char *data)
   {
-
-    myFile = SD.open("test.txt", FILE_WRITE);
-
     // if the file opened okay, write to it:
     if (myFile)
     {
-      // Serial.print("Saving: ");
-      // Serial.println(data);
-      myFile.println(data);
-
-      // close the file:
-      myFile.close();
-      // Serial.println("Data saved and file closed.");
+      myFile.print(data);
       return 0;
     }
     else
     {
-      // if the file didn't open, print an error:
-      Serial.println("Error opening test.txt");
+      // if the file didn't open, return error code
       return 1;
     }
   }
@@ -56,11 +78,11 @@ namespace uSD
     return write_data(buffer);
   }
 
-  // Overload to allow calling with a float
-  int write_data(float num)
+  // Overload to allow calling with a double
+  int write_data(double num)
   {
     char buffer[25];
-    sprintf(buffer, "%f", num);
+    dtostrf(num, 0, 5, buffer);
     return write_data(buffer);
   }
 

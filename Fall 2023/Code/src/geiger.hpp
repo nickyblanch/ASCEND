@@ -9,8 +9,8 @@
 #include <RadiationWatch.h>
 #include "def.hpp"
 
-#define NOISE_PIN 23
-#define RADIATION_PIN 27
+#define NOISE_PIN 2
+#define RADIATION_PIN 3
 
 // Creating RadiationWatch Object for Setup:
 

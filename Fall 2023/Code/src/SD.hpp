@@ -12,19 +12,24 @@
 #include <SPI.h>
 #include <SD.h>
 
+#include "def.hpp"
+
 extern File myFile;
+extern char filename[25];
 
 namespace uSD
 {
   int setup();
+
+  int loop();
 
   int write_data(char *data);
 
   // Overload to allow calling with an integer
   int write_data(int num);
 
-  // Overload to allow calling with a float
-  int write_data(float num);
+  // Overload to allow calling with a double
+  int write_data(double num);
 }
 
 #endif

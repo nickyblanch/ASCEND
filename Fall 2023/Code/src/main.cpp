@@ -24,7 +24,7 @@
 // Custom files
 ///////////////////////////////////////////////////////////////
 
-#define DEBUG_MODE
+// #define DEBUG_MODE
 
 #include "def.hpp"
 #include "BME680.hpp"
@@ -41,6 +41,7 @@
 ///////////////////////////////////////////////////////////////
 
 File myFile;
+char filename[25];
 RadiationWatch geigerObject;
 DFRobot_OzoneSensor Ozone;
 
@@ -62,13 +63,17 @@ void setup()
 
     // SETUP SENSORS
     // SOUND::setup();
-    // GUVA::setup();
-    // BME::setup();
-    // BME2::setup();
-    // setup_IMU();
-    // GEIGER::setup();
+
+    log("millis, ");
+
+    GUVA::setup();
+    BME::setup();
+    BME2::setup();
+    setup_IMU();
+    GEIGER::setup();
     OZONE::setup_o3();
 
+    log("\n");
     Serial.println("End of setup!");
 }
 
@@ -86,13 +91,16 @@ void loop()
     // Write data to file
     // ...
 
+    log((int)millis());
+
     // SOUND::read();
-    // GUVA::read();
-    // BME::read();
-    // BME2::read();
-    // data_IMU();
-    // GEIGER::loop();
+    GUVA::read();
+    BME::read();
+    BME2::read();
+    data_IMU();
+    GEIGER::loop();
     OZONE::get_o3_data();
 
     log("\n");
+    uSD::loop(); // Closes and opens file
 }

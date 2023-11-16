@@ -49,11 +49,19 @@
           <v-card-title class="">Configuration</v-card-title>
           <v-card-text class="mt-2">
             <v-select
-              class="mr-4"
+              class="mr-4 mb-4"
               v-model="csv_file"
               :items="files"
               label="Select Data"
               hide-details="auto"
+              variant="outlined"
+            />
+
+            <v-file-input
+              v-model="user_file"
+              @update:model-value="unpackUserFile"
+              label="Upload Data"
+              hide-details="true"
               variant="outlined"
             />
 
@@ -113,6 +121,7 @@ const blurAmount = ref(1);
 const derivative = ref(0);
 
 const csv_file = ref("Spring_2023.csv");
+const user_file = ref(null);
 const line = ref(false);
 
 const files = ["Spring_2023.csv", "Fall_2022.csv"];
@@ -122,42 +131,58 @@ const updateSmoothing = (newVal) => {
   blurAmount.value = newVal;
 };
 
+const unpackText = (text) => {
+  const cols = {};
+  const rows = text.split("\n");
+  const headers = rows[0].split(",");
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i].split(",");
+    for (let j = 0; j < row.length; j++) {
+      const col = headers[j];
+      if (!cols[col]) {
+        cols[col] = [];
+      }
+      cols[col].push(Number(row[j]));
+    }
+  }
+  delete cols[""];
+  delete cols[" "];
+
+  // create rows for seconds, minutes, and hours
+  if (cols["millis"]) {
+    cols["seconds"] = cols["millis"].map((x) => x / 1000);
+    cols["minutes"] = cols["millis"].map((x) => x / 1000 / 60);
+    cols["hours"] = cols["millis"].map((x) => x / 1000 / 60 / 60);
+  }
+
+  data.value = Object.assign(
+    { millis: null, seconds: null, minutes: null, hours: null },
+    cols
+  );
+
+  xAxis.value == xAxis.value in data.value ? xAxis.value : null;
+  yAxis.value == yAxis.value in data.value ? yAxis.value : null;
+  zAxis.value == zAxis.value in data.value ? zAxis.value : null;
+
+  console.log(cols);
+};
+
+const unpackUserFile = (newVal) => {
+  console.log(newVal[0]);
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const text = e.target.result;
+    unpackText(text);
+  };
+  reader.readAsText(newVal[0]);
+
+  chartData.value = null;
+};
+
 const unpackCSV = () => {
   fetch("Data/" + csv_file.value)
     .then((response) => response.text())
-    .then((text) => {
-      const cols = {};
-      const rows = text.split("\n");
-      const headers = rows[0].split(",");
-      for (let i = 1; i < rows.length; i++) {
-        const row = rows[i].split(",");
-        for (let j = 0; j < row.length; j++) {
-          const col = headers[j];
-          if (!cols[col]) {
-            cols[col] = [];
-          }
-          cols[col].push(Number(row[j]));
-        }
-      }
-      delete cols[""];
-      delete cols[" "];
-
-      // create rows for seconds, minutes, and hours
-      cols["seconds"] = cols["millis"].map((x) => x / 1000);
-      cols["minutes"] = cols["millis"].map((x) => x / 1000 / 60);
-      cols["hours"] = cols["millis"].map((x) => x / 1000 / 60 / 60);
-
-      data.value = Object.assign(
-        { millis: null, seconds: null, minutes: null, hours: null },
-        cols
-      );
-
-      xAxis.value == xAxis.value in data.value ? xAxis.value : null;
-      yAxis.value == yAxis.value in data.value ? yAxis.value : null;
-      zAxis.value == zAxis.value in data.value ? zAxis.value : null;
-
-      console.log(cols);
-    });
+    .then(unpackText);
 
   chartData.value = null;
 };

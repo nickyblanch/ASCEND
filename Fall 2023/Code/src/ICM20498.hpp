@@ -97,6 +97,7 @@ void data_IMU(void)
   else
   {
     Serial.println("Failed to get data from IMU, trying to setup");
+    log("Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, ");
     setup_IMU();
   }
 }

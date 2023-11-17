@@ -7,18 +7,19 @@ BME680 => i2p through library
 ICM20498 => i2p
 > 9DOF 
 
-MICS5524 => Analog pin
-> VOC detection
-> En pin - digital heater enable 
+SD Reader => SPI
+> Duh
 
-1918 => Analog pin
+Gravity Ozone Sensor => i2p library
+> Ozone concentration
+
+GUVA 1918 => Analog pin
 > UV detection
 > UV Index = V*10
 
-SparkfunSound => 3 Analog Pins
-> Audio
-> Envelope
-> Gate
+Radiation Sensor => 2 interrupt pins
+> Radiation
+
 
 BLINK CODE MEANING!!!
 

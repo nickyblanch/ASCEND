@@ -93,7 +93,8 @@ void loop()
     // Write data to file
     // ...
 
-    log((int)millis());
+    log((long)millis());
+    log(", ");
 
     // SOUND::read();
     GUVA::read();
@@ -102,7 +103,7 @@ void loop()
     data_IMU();
     GEIGER::loop();
     OZONE::get_o3_data();
-
     log("\n");
+
     uSD::loop(); // Closes and opens file
 }

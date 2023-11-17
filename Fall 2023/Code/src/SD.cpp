@@ -28,14 +28,14 @@ namespace uSD
     int file_num = 0;
 
     // Sequentially check for the next available file name
-    sprintf(filename, "test%d.txt", file_num);
+    sprintf(filename, "log%d.csv", file_num);
     while (SD.exists(filename))
     {
       Serial.print(filename);
       Serial.println(" exists, trying next");
 
       file_num++;
-      sprintf(filename, "test%d.txt", file_num);
+      sprintf(filename, "log%d.csv", file_num);
     }
 
     Serial.print("Unnused file name found: ");
@@ -56,14 +56,7 @@ namespace uSD
       Serial.print("I have no mouth and I must scream (couldnt open): ");
       Serial.println(filename);
 
-      for (int i = 0; i < 10; i++)
-      {
-        digitalWrite(LED_PIN, HIGH);
-        delay(100);
-        digitalWrite(LED_PIN, LOW);
-        delay(100);
-      }
-      return 1;
+      return setup();
     }
     return 0;
   }
@@ -84,6 +77,13 @@ namespace uSD
   }
 
   // Overload to allow calling with an integer
+  int write_data(long num)
+  {
+    char buffer[25];
+    sprintf(buffer, "%ld", num);
+    return write_data(buffer);
+  }
+
   int write_data(int num)
   {
     char buffer[25];

@@ -26,6 +26,7 @@ namespace uSD
   int write_data(char *data);
 
   // Overload to allow calling with an integer
+  int write_data(long num);
   int write_data(int num);
 
   // Overload to allow calling with a double

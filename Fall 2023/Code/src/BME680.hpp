@@ -64,6 +64,7 @@ namespace BME
     if (!bme.performReading())
     {
       Serial.println("Failed to perform reading :(. Trying to connect again...");
+      log("Null, Null, Null, Null, Null, ");
       setup();
       return;
     }

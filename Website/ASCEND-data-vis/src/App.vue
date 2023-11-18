@@ -1,10 +1,13 @@
 <template>
   <v-theme-provider :theme="dark ? 'dark' : 'light'">
-    <v-app style="height: 100vh;">
-      <v-app-bar title="University of Arizona ASCEND Data Visualization"
-                 color="primary" elevation="2" class="text-white">
+    <v-app style="height: 100vh">
+      <v-app-bar
+        title="University of Arizona ASCEND Data Visualization"
+        color="primary"
+        elevation="2"
+        class="text-white"
+      >
         <template v-slot:append>
-
           <v-btn icon="mdi-theme-light-dark" @click="dark = !dark" />
         </template>
       </v-app-bar>
@@ -19,9 +22,7 @@
 import PageWrapper from "@/components/PageWrapper.vue";
 import { ref } from "vue";
 
-const dark = ref(true);
-
-
+const dark = ref(false);
 </script>
 
 <style>

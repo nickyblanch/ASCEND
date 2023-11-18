@@ -2,7 +2,6 @@ BME680 => i2p through library
 > Temp
 > Humidity
 > Barometric Pressure
-> VOC gas
 
 ICM20498 => i2p
 > 9DOF 

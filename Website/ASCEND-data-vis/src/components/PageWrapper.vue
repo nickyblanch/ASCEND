@@ -3,19 +3,6 @@
     <v-row class="h-100">
       <!-- x axis picker -->
       <v-col cols="2" class="h-100 py-0 mt-3 d-flex flex-column">
-        <!-- <v-card class="h-100">
-          <v-card-title class="bg-primary">X-Axis</v-card-title>
-          <v-row style="height: 95%; overflow-y: scroll" class="pt-2 ma-0">
-            <v-col cols="12" v-for="(val, col) in data" :key="col" class="py-1">
-              <v-card @click="xAxis = col" variant="outlined"
-                      :class="xAxis == col ? 'bg-secondary' : ''" elevation="
-                                        2">
-                <v-card-title class="text-subtitle-1">{{ col }}</v-card-title>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-card> -->
-
         <v-card v-if="data">
           <v-card-title class="bg-secondary">Select Axes</v-card-title>
           <v-card-text class="mt-4">
@@ -48,22 +35,18 @@
         <v-card class="mt-4" variant="outlined">
           <v-card-title class="">Configuration</v-card-title>
           <v-card-text class="mt-2">
-            <v-select
-              class="mr-4 mb-4"
-              v-model="csv_file"
-              :items="files"
-              label="Select Data"
-              hide-details="auto"
-              variant="outlined"
-            />
-
-            <v-file-input
-              v-model="user_file"
-              @update:model-value="unpackUserFile"
-              label="Upload Data"
-              hide-details="true"
-              variant="outlined"
-            />
+            <row>
+              <v-select
+                class="mr-4 mb-4"
+                v-model="csv_file"
+                :items="files"
+                label="Select or Upload Data"
+                hide-details="auto"
+                variant="outlined"
+                append-icon="mdi-paperclip"
+                @click:append="promptFile"
+              />
+            </row>
 
             <v-checkbox label="Lines?" v-model="line" hide-details="auto" />
             <div class="text-subtitle-1">
@@ -114,15 +97,17 @@ import Chart3d from "@/components/Chart3d.vue";
 
 const data = ref(null);
 const chartData = ref(null);
-const xAxis = ref("millis");
+const xAxis = ref("minutes");
 const yAxis = ref(null);
 const zAxis = ref(null);
-const blurAmount = ref(1);
+const blurAmount = ref(0);
 const derivative = ref(0);
 
 const csv_file = ref("Spring_2023.csv");
-const user_file = ref(null);
 const line = ref(false);
+
+const fileInput = document.createElement("input");
+fileInput.type = "file";
 
 const files = ["Spring_2023.csv", "Fall_2022.csv"];
 
@@ -132,8 +117,11 @@ const updateSmoothing = (newVal) => {
 };
 
 const unpackText = (text) => {
+  xAxis.value = null;
+  yAxis.value = null;
+  zAxis.value = null;
   const cols = {};
-  const rows = text.split("\n");
+  const rows = text.trim().split("\n");
   const headers = rows[0].split(",");
   for (let i = 1; i < rows.length; i++) {
     const row = rows[i].split(",");
@@ -155,28 +143,32 @@ const unpackText = (text) => {
     cols["hours"] = cols["millis"].map((x) => x / 1000 / 60 / 60);
   }
 
+  xAxis.value == xAxis.value in cols ? xAxis.value : null;
+  yAxis.value == yAxis.value in cols ? yAxis.value : null;
+  zAxis.value == zAxis.value in cols ? zAxis.value : null;
+
   data.value = Object.assign(
     { millis: null, seconds: null, minutes: null, hours: null },
     cols
   );
 
-  xAxis.value == xAxis.value in data.value ? xAxis.value : null;
-  yAxis.value == yAxis.value in data.value ? yAxis.value : null;
-  zAxis.value == zAxis.value in data.value ? zAxis.value : null;
-
   console.log(cols);
 };
 
-const unpackUserFile = (newVal) => {
-  console.log(newVal[0]);
+fileInput.onchange = (e) => {
+  const file = e.target.files[0];
   const reader = new FileReader();
-  reader.onload = (e) => {
-    const text = e.target.result;
+  reader.onload = (e2) => {
+    const text = e2.target.result;
     unpackText(text);
   };
-  reader.readAsText(newVal[0]);
+  reader.readAsText(file);
 
   chartData.value = null;
+};
+
+const promptFile = () => {
+  fileInput.click();
 };
 
 const unpackCSV = () => {
@@ -191,6 +183,7 @@ unpackCSV();
 
 const chartData3d = computed(() => {
   if (xAxis.value && yAxis.value) {
+    console.log(data);
     const xData = xAxis.value ? data.value[xAxis.value].slice() : [];
     const yData = yAxis.value ? data.value[yAxis.value].slice() : [];
     const zData = zAxis.value ? data.value[zAxis.value].slice() : [];

@@ -109,7 +109,7 @@ const line = ref(false);
 const fileInput = document.createElement("input");
 fileInput.type = "file";
 
-const files = ["Spring_2023.csv", "Fall_2022.csv"];
+const files = ["Fall_2023.csv", "Spring_2023.csv", "Fall_2022.csv"];
 
 const updateSmoothing = (newVal) => {
   console.log(newVal);

@@ -11,8 +11,6 @@
 #include "GUVA.hpp"
 #include "geiger.hpp"
 
-#define SD_PIN 53U
-
 File log_file;
 
 void setup()

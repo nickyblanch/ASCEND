@@ -1,9 +1,5 @@
 #include "def.hpp"
 #include <RadiationWatch.h>
-
-#define SIGN_PIN 3
-#define NOISE_PIN 2
-
 namespace RAD
 {
 

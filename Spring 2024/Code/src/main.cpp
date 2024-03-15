@@ -88,3 +88,11 @@ void loop()
 
   // delay(200);
 }
+
+// TODO
+// 1.) Update pin assignments (pin numbers)
+// 2.) Change functions (BME::read, ICM::read, GUVA::read, Gravity::read) to NOT log, but rather return their numeric values
+// 3.) Make the function that does the logging to SD card
+// 4.) In case of power interrupt, recover time stamp
+// 5.) Check geiger code
+// 6.) Check LED code (come up with something clever to check geiger functionality) (may or may not be able to)

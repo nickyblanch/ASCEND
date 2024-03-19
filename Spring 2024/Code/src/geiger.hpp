@@ -1,23 +1,34 @@
+#pragma once
+
 #include "def.hpp"
 #include <RadiationWatch.h>
-namespace RAD
+class GeigerCounter
 {
+  struct measurement
+  {
+    int hits;
+    int cpm;
+    float uSvh;
+    float uSvhError;
+    int noise;
+  };
 
-  RadiationWatch geiger(SIGN_PIN, NOISE_PIN);
-  int hitsSinceRead = 0;
-  int noiseSinceRead = 0;
+  RadiationWatch geiger;
+  static int hitsSinceRead;
+  static int noiseSinceRead;
 
-  void gammaCallback()
+  static void gammaCallback()
   {
     hitsSinceRead++;
   }
 
-  void noiseCallback()
+  static void noiseCallback()
   {
     noiseSinceRead++;
   }
 
-  void init()
+  GeigerCounter()
+      : geiger(SIGN_PIN, NOISE_PIN)
   {
     geiger.setup();
     geiger.registerRadiationCallback(gammaCallback);
@@ -25,22 +36,30 @@ namespace RAD
     Serial.println("Initialized Geiger");
   }
 
-  void read(File &log_file)
+  void read()
   {
     geiger.loop();
+    measurement m = {
+        geiger.radiationCount(),
+        geiger.cpm(),
+        geiger.uSvh(),
+        geiger.uSvhError(),
+        noiseSinceRead};
 
-    log(geiger.radiationCount());
-    log(",");
-    log(geiger.cpm());
-    log(",");
-    log(geiger.uSvh());
-    log(",");
-    log(geiger.uSvhError());
-    log(",");
-    log(noiseSinceRead);
-    log(",");
+    // log(geiger.radiationCount());
+    // log(",");
+    // log(geiger.cpm());
+    // log(",");
+    // log(geiger.uSvh());
+    // log(",");
+    // log(geiger.uSvhError());
+    // log(",");
+    // log(noiseSinceRead);
+    // log(",");
 
     noiseSinceRead = 0;
   }
+};
 
-}
+int GeigerCounter::hitsSinceRead = 0;
+int GeigerCounter::noiseSinceRead = 0;

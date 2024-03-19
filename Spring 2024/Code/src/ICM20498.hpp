@@ -1,7 +1,7 @@
 #include "ICM_20948.h"
 #include "def.hpp"
 
-namespace ICM
+class ICM
 {
     struct vec
     {
@@ -19,7 +19,7 @@ namespace ICM
 
     ICM_20948_I2C icm;
 
-    void init()
+    ICM()
     {
         bool initialized = false;
         int tries = 0;
@@ -50,7 +50,8 @@ namespace ICM
         }
     }
 
-    measurement read(File &log_file)
+public:
+    measurement read()
     {
         if (icm.dataReady())
         {
@@ -62,24 +63,24 @@ namespace ICM
                 {icm.gyrX(), icm.gyrY(), icm.gyrZ()},
                 {icm.magX(), icm.magY(), icm.magZ()}};
 
-            log(r.acc.x, 3);
-            log(",");
-            log(r.acc.y, 3);
-            log(",");
-            log(r.acc.z, 3);
-            log(",");
-            log(r.gyr.x, 3);
-            log(",");
-            log(r.gyr.y, 3);
-            log(",");
-            log(r.gyr.z, 3);
-            log(",");
-            log(r.mag.x, 3);
-            log(",");
-            log(r.mag.y, 3);
-            log(",");
-            log(r.mag.z, 3);
-            log(",");
+            // log(r.acc.x, 3);
+            // log(",");
+            // log(r.acc.y, 3);
+            // log(",");
+            // log(r.acc.z, 3);
+            // log(",");
+            // log(r.gyr.x, 3);
+            // log(",");
+            // log(r.gyr.y, 3);
+            // log(",");
+            // log(r.gyr.z, 3);
+            // log(",");
+            // log(r.mag.x, 3);
+            // log(",");
+            // log(r.mag.y, 3);
+            // log(",");
+            // log(r.mag.z, 3);
+            // log(",");
 
             return r;
         }
@@ -90,4 +91,4 @@ namespace ICM
             return {};
         }
     }
-}
+};

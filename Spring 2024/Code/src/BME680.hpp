@@ -1,12 +1,11 @@
 #include "Adafruit_BME680.h"
 #include "def.hpp"
 
-Adafruit_BME680 bme;
-
 #define SEALEVELPRESSURE_HPA (1013.25)
 
-namespace BME
+class AtmosphericSensor
 {
+    Adafruit_BME680 bme;
     struct measurement
     {
         float temp;     // *C
@@ -16,7 +15,7 @@ namespace BME
         float altitude; // Meters
     };
 
-    void init()
+    AtmosphericSensor()
     {
         int i = 0;
         bool inited = false;
@@ -51,25 +50,26 @@ namespace BME
         bme.setGasHeater(320, 150); // 320*C for 150 mss
     }
 
-    measurement read(File &log_file)
+public:
+    measurement read()
     {
         if (!bme.performReading())
         {
             Serial.println("Failed to perform reading :(");
-            log("0,0,0,0,0,");
+            // log("0,0,0,0,0,");
             return {};
         }
 
-        log(bme.temperature);
-        log(",");
-        log(bme.pressure);
-        log(",");
-        log(bme.humidity);
-        log(",");
-        log(bme.gas_resistance / 1000.0);
-        log(",");
-        log(bme.readAltitude(SEALEVELPRESSURE_HPA));
-        log(",");
+        // log(bme.temperature);
+        // log(",");
+        // log(bme.pressure);
+        // log(",");
+        // log(bme.humidity);
+        // log(",");
+        // log(bme.gas_resistance / 1000.0);
+        // log(",");
+        // log(bme.readAltitude(SEALEVELPRESSURE_HPA));
+        // log(",");
 
         return {
             bme.temperature,
@@ -78,4 +78,4 @@ namespace BME
             bme.gas_resistance / 1000.0,
             bme.readAltitude(SEALEVELPRESSURE_HPA)};
     }
-}
+};

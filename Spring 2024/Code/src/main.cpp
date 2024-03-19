@@ -12,6 +12,9 @@
 #include "geiger.hpp"
 
 File log_file;
+AtmosphericSensor BME680;
+UVSensor GUVA;
+GeigerCounter RAD;
 
 void setup()
 {

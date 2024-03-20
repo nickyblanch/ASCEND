@@ -51,7 +51,7 @@ namespace BME
         bme.setGasHeater(320, 150); // 320*C for 150 mss
     }
 
-    measurement read(File &log_file)
+    measurement read()
     {
         if (!bme.performReading())
         {

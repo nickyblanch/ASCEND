@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 #include "def.hpp"
 #include <RadiationWatch.h>
 namespace RAD
@@ -25,7 +27,7 @@ namespace RAD
     Serial.println("Initialized Geiger");
   }
 
-  void read(File &log_file)
+  void read()
   {
     geiger.loop();
 

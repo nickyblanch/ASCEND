@@ -38,7 +38,7 @@ namespace Gravity
          */
         Ozone.setModes(MEASURE_MODE_PASSIVE);
     }
-    int16_t read(File &log_file)
+    int16_t read()
     {
         /**
          * Smooth data collection

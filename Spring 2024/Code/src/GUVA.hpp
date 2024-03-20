@@ -7,7 +7,7 @@ namespace GUVA
         int value; // value: [0, 1023] = [0v, 5v]
     };
 
-    measurement read(File &log_file)
+    measurement read()
     {
         auto reading = analogRead(ADAFRUIT_1918);
         log(reading);

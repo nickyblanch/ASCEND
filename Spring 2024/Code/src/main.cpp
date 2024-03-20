@@ -4,94 +4,63 @@
 
 #define DEBUG_MODE
 
+#include "SD.hpp"
 #include "def.hpp"
 #include "BME680.hpp"
-#include "ICM20498.hpp"
+#include "LSM9DS1.hpp"
 #include "Gravity.hpp"
 #include "GUVA.hpp"
 #include "geiger.hpp"
 
-File log_file;
+File myFile;
+char filename[25];
 
 void setup()
 {
   pinMode(LED_PIN, OUTPUT);
-  Serial.begin(9600);
+  // pinMode(SIGN_PIN, INPUT);
+  // pinMode(NOISE_PIN, INPUT);
+
+  Serial.begin(115200);
   Wire.begin();
-  Wire.setClock(400000);
+  Serial.println("Begin boot!");
+  // Wire.setClock(400000); THIS LINE WAS THE PROBLEM!!!!!!!
 
-  while (!SD.begin(SD_PIN))
-  {
-    Serial.println("Failed to initialize SD Card");
-    // flash led pin rapidly 10 times
-    for (int i = 0; i < 10; i++)
-    {
-      digitalWrite(LED_PIN, HIGH);
-      delay(50);
-      digitalWrite(LED_PIN, LOW);
-      delay(50);
-    }
-  }
-  Serial.println("Initialized SD Card");
-  digitalWrite(LED_PIN, LOW);
-
-  log_file = SD.open("log.txt", FILE_WRITE);
-
-  if (!log_file)
-  {
-    Serial.println("Failed to open/create log.txt");
-    digitalWrite(LED_PIN, HIGH);
-    delay(100);
-    digitalWrite(LED_PIN, LOW);
-    delay(100);
-    log_file = SD.open("log.txt", FILE_WRITE);
-  }
-  else
-  {
-    Serial.println("Log File Created");
-  }
+  uSD::setup();
 
   BME::init();
-  ICM::init();
+  LSM::init();
   RAD::init();
   Gravity::init();
 
   // put the meaning of values as headers in the file
   log("millis,bmetemp(*C),bmepres(Pa),bmehum(%),bmegas_res(KOhm),bmealt(m),accX (mg),accY (mg),accZ (mg),gyrX (deg/sec),gyrY (deg/sec),gyrZ (deg/sec),magX (uT),magY (uT),magZ (uT),UV [0-1023],radiation count,rad count per min,uSv/h,uSv/h error,noise events,ozone concentration,\n");
-  log_file.close();
+  // log_file.close();
 }
 
 void loop()
 {
-  log_file = SD.open("log.txt", FILE_WRITE);
-  if (!log_file)
-  {
-    Serial.println("Failed to open/create log.txt");
-    digitalWrite(LED_PIN, HIGH);
-    delay(500);
-  }
-
-  log(millis());
+  log((long)millis());
   log(",");
   // reading values writes to log
   // could do something with these values if desired
-  auto bme_reading = BME::read(log_file);
-  auto icm_reading = ICM::read(log_file);
-  auto guva_reading = GUVA::read(log_file);
-  RAD::read(log_file);
-  auto gravity_reading = Gravity::read(log_file);
+  auto bme_reading = BME::read();
+  auto icm_reading = LSM::read();
+  auto guva_reading = GUVA::read();
+  RAD::read();
+  auto gravity_reading = Gravity::read();
 
   log("\n"); // newline
 
   // Serial.println(log_file.getWriteError());
-  log_file.close();
 
+  uSD::loop();
   // delay(200);
 }
 
 // TODO
 // 1.) Update pin assignments (pin numbers)
-// 2.) Change functions (BME::read, ICM::read, GUVA::read, Gravity::read) to NOT log, but rather return their numeric values
+// 2.) Change functions (BME::read, LSM::read, GUVA::read, Gravity::read) to NOT log, but rather return their numeric values
 // 3.) Make the function that does the logging to SD card
 // 4.) In case of power interrupt, recover time stamp
 // 5.) Check geiger code

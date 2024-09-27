@@ -2,14 +2,14 @@
 #include <SPI.h>
 #include <SD.h>
 
-#define DEBUG_MODE
+// #define DEBUG_MODE
 
 #include "SD.hpp"
 #include "def.hpp"
 #include "BME680.hpp"
 #include "LSM9DS1.hpp"
 #include "Gravity.hpp"
-#include "GUVA.hpp"
+// #include "GUVA.hpp"
 #include "geiger.hpp"
 
 File myFile;
@@ -46,7 +46,7 @@ void loop()
   // could do something with these values if desired
   auto bme_reading = BME::read();
   auto icm_reading = LSM::read();
-  auto guva_reading = GUVA::read();
+  // auto guva_reading = GUVA::read();
   RAD::read();
   auto gravity_reading = Gravity::read();
 

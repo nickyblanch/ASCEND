@@ -1,16 +1,22 @@
 ///////////////////////////////////////////////////////////////
 // UA SEDS ASCEND FALL 2024
-// AUTHORS: Colin Brown
+// AUTHORS: Nicky B and Colin Brown
 // PURPOSE: SD Card Code !!!
 ///////////////////////////////////////////////////////////////
-
-#ifndef SD_CARD
-#define SD_CARD
+#pragma once
 
 #define SD_PIN 53U
 
-class SDCard
+#include <SPI.h>
+#include <SD.h>
+
+class uSD
 {
+
+    File myFile;
+    char filename[25];
+
+public:
     int setup();
 
     int loop();
@@ -25,5 +31,3 @@ class SDCard
     // Overload to allow calling with a double
     int write_data(double num);
 };
-
-#endif

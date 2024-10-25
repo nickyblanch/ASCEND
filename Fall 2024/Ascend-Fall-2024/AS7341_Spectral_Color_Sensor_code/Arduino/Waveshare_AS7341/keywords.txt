@@ -1,0 +1,64 @@
+#######################################
+# Syntax Coloring Map For AS7341 Spectral Color Sensor
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+DEBUG	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+AS7341_Init	KEYWORD2
+
+AS7341_ATIME_config	KEYWORD2
+AS7341_ASTEP_config	KEYWORD2
+AS7341_AGAIN_config	KEYWORD2
+
+AS7341_startMeasure	KEYWORD2
+AS7341_ReadSpectralDataOne	KEYWORD2
+AS7341_ReadSpectralDataTwo	KEYWORD2
+AS7341_ReadFlickerData	KEYWORD2
+AS7341_ControlLed	KEYWORD2
+AS7341_EnableLED	KEYWORD2
+ AS7341_MeasureComplete	KEYWORD2
+
+AS7341_INTerrupt	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+eNormal	LITERAL1
+eCH_F1	LITERAL1
+eCH_F2	LITERAL1
+eCH_F3	LITERAL1
+eCH_F4	LITERAL1
+eCH_F5	LITERAL1
+eCH_F6	LITERAL1
+eCH_F7	LITERAL1
+eCH_F8	LITERAL1
+eCH_CLEAR	LITERAL1
+eCH_NIR	LITERAL1
+eF1F4ClearNIR	LITERAL1
+eF5F8ClearNIR	LITERAL1
+
+ADF1	LITERAL1
+ADF2	LITERAL1
+ADF3	LITERAL1
+ADF4	LITERAL1
+ADCLEAR	LITERAL1
+ADNIR	LITERAL1
+ADF5	LITERAL1
+ADF6	LITERAL1
+ADF7	LITERAL1
+ADF8	LITERAL1
+ADCLEAR	LITERAL1
+ADNIR	LITERAL1
+
+eSpm	LITERAL1
+eSyns	LITERAL1
+eSynd	LITERAL1

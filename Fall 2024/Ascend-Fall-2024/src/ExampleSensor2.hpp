@@ -50,8 +50,4 @@ public:
         // Return our descriptors to be used in the main loop
         return descriptors;
     }
-    int getDataCount()
-    {
-        return sizeof(data) / sizeof(data[0]);
-    }
 };

@@ -9,6 +9,7 @@
 #include "SD.hpp"
 #include "ExampleSensor.hpp"
 #include "ExampleSensor2.hpp"
+#include "SpectralSensor.hpp"
 
 class CNS
 {
@@ -16,7 +17,7 @@ private:
     /* data */
     Sensor *sensors[2] = {
         new ExampleSensor(),
-        new ExampleSensor2(),
+        new SpectralSensor(),
     };
 
     uSD sd;

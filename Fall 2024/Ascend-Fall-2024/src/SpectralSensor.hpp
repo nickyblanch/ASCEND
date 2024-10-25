@@ -7,7 +7,7 @@
 #include <Sensor.hpp>
 #include <Waveshare_AS7341.h>
 
-class ExampleSensor : public Sensor
+class SpectralSensor : public Sensor
 {
 private:
     double data[10] = {0.0};
@@ -27,7 +27,7 @@ private:
     sModeTwoData_t data2;
 
 public:
-    ExampleSensor()
+    SpectralSensor()
     {
     }
     int init()

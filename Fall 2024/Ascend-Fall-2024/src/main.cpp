@@ -13,8 +13,9 @@ void setup()
 {
     Serial.begin(9600);
 
-    cns.initializeSD();
+    // cns.initializeSD();
     cns.initializeSensors();
+    cns.printOperationalSensors();
     cns.printFailedSensors();
     cns.createCSVHeaders();
 }
@@ -23,5 +24,6 @@ void loop()
 {
     cns.readSensorData();
     cns.printSensorData();
+    // cns.refreshSD();
     delay(1000);
 }

@@ -30,6 +30,10 @@ public:
     SpectralSensor()
     {
     }
+    int getDataCount()
+    {
+        return 10;
+    }
     int init()
     {
         // Initialize sensor

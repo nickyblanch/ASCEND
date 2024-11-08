@@ -13,6 +13,11 @@ CNS::CNS()
 
 void CNS::initializeSD()
 {
+    // Refresh the SD card
+    while (sd.loop() != 0)
+    {
+        delay(1000);
+    }
 }
 
 void CNS::initializeSensors()
@@ -24,8 +29,22 @@ void CNS::initializeSensors()
         while (sensor->init() != 0 && tries < 3)
         {
             Serial.println(sensor->getName() + ": Failed to initialize sensor, retrying in 1 second");
+            // Force write to Serial
+            Serial.flush();
             tries++;
             delay(1000);
+        }
+    }
+}
+
+void CNS::printOperationalSensors()
+{
+    // Print operational sensors
+    for (Sensor *sensor : sensors)
+    {
+        if (sensor->isOperational())
+        {
+            Serial.println("Operational: " + sensor->getName());
         }
     }
 }
@@ -37,7 +56,7 @@ void CNS::printFailedSensors()
     {
         if (!sensor->isOperational())
         {
-            Serial.println(sensor->getName() + ": Sensor is not operational");
+            Serial.println("FAILED: " + sensor->getName());
         }
     }
 }
@@ -51,13 +70,13 @@ void CNS::createCSVHeaders()
         {
             String *descriptors = sensor->getDescriptors();
             int dataCount = sensor->getDataCount();
-            Serial.println(sensor->getName() + ", ");
             for (int i = 0; i < dataCount; i++)
             {
-                Serial.print(descriptors[i] + ", ");
+                Serial.print(sensor->getName() + " (" + descriptors[i] + "), ");
             }
         }
     }
+    Serial.println();
 }
 
 void CNS::readSensorData()
@@ -79,11 +98,17 @@ void CNS::printSensorData()
         {
             double *data = sensor->getData();
             int dataCount = sensor->getDataCount();
-            Serial.println(sensor->getName() + ", ");
             for (int i = 0; i < dataCount; i++)
             {
                 Serial.print(String(data[i]) + ", ");
             }
         }
     }
+    Serial.println();
+}
+
+void CNS::refreshSD()
+{
+    // Refresh the SD card
+    sd.loop();
 }

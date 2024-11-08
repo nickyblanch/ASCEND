@@ -10,14 +10,17 @@
 #include "ExampleSensor.hpp"
 #include "ExampleSensor2.hpp"
 #include "SpectralSensor.hpp"
+#include "UVSensor.hpp"
 
 class CNS
 {
 private:
     /* data */
-    Sensor *sensors[2] = {
+    Sensor *sensors[3] = {
         new ExampleSensor(),
-        new SpectralSensor(),
+        new ExampleSensor2(),
+        new UVSensor()
+        // new SpectralSensor(),
     };
 
     uSD sd;
@@ -28,10 +31,12 @@ public:
 
     void initializeSD();
     void initializeSensors();
+    void printOperationalSensors();
     void printFailedSensors();
     void createCSVHeaders();
 
     void readSensorData();
     void printSensorData();
     void writeSensorData();
+    void refreshSD();
 };

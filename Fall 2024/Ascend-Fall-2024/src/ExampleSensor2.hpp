@@ -19,22 +19,22 @@ public:
     }
     int init()
     {
-        // Initialize sensor
-        Serial.println("Initializing Example Sensor 2");
         // Dont have to do anything else for this example
         operational = true;
         return 0; // Return 0 if successful
     };
+    int getDataCount()
+    {
+        return 1;
+    }
     bool isOperational()
     {
         return operational;
     }
     void readData()
     {
-        // Read sensor data
-        Serial.println("Reading Example Sensor Data");
         // Generate random data
-        data[0] = random(0, 100);
+        data[0] = random(0, 1000);
     }
     double *getData()
     {

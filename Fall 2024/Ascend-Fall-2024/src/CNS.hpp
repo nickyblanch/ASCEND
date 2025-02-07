@@ -13,7 +13,7 @@
 #include "UVSensor.hpp"
 #include "IMU.hpp"
 #include "Ozone.hpp"
-#include "BME680.hpp"
+// #include "BME680.hpp"
 
 class CNS
 {
@@ -22,7 +22,7 @@ private:
     Sensor *sensors[5] = {
         // new ExampleSensor(),
         // new ExampleSensor2(),
-        new BME680(),
+        // new BME680(),
         new UVSensor(),
         new IMU(),
         new SpectralSensor(),
@@ -40,6 +40,9 @@ public:
     void printOperationalSensors();
     void printFailedSensors();
     void createCSVHeaders();
+
+    Sensor *getSensor(int index);
+    Sensor *getSensorByName(String name);
 
     void readSensorData();
     void printSensorData();

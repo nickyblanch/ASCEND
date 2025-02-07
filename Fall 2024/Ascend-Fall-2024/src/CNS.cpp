@@ -20,6 +20,23 @@ void CNS::initializeSD()
     }
 }
 
+Sensor *CNS::getSensor(int index)
+{
+    return sensors[index];
+}
+
+Sensor *CNS::getSensorByName(String name)
+{
+    for (Sensor *sensor : sensors)
+    {
+        if (sensor->getName() == name)
+        {
+            return sensor;
+        }
+    }
+    return nullptr;
+}
+
 void CNS::initializeSensors()
 {
     // Initialize sensors

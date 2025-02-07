@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////
 #pragma once
 
-#define SD_PIN 53U
+#define SD_PIN 10U
 
 #include <SPI.h>
 #include <SD.h>

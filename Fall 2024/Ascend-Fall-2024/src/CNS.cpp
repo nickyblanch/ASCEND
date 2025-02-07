@@ -14,7 +14,7 @@ CNS::CNS()
 void CNS::initializeSD()
 {
     // Refresh the SD card
-    while (sd.loop() != 0)
+    while (sd.setup() != 0)
     {
         delay(1000);
     }
@@ -26,6 +26,8 @@ void CNS::initializeSensors()
     for (Sensor *sensor : sensors)
     {
         int tries = 0;
+        Serial.println("Initializing: " + sensor->getName());
+        Serial.flush();
         while (sensor->init() != 0 && tries < 3)
         {
             Serial.println(sensor->getName() + ": Failed to initialize sensor, retrying in 1 second");
@@ -41,12 +43,8 @@ void CNS::printOperationalSensors()
 {
     // Print operational sensors
     for (Sensor *sensor : sensors)
-    {
         if (sensor->isOperational())
-        {
             Serial.println("Operational: " + sensor->getName());
-        }
-    }
 }
 
 void CNS::printFailedSensors()

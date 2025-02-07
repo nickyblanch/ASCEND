@@ -22,6 +22,8 @@ namespace BME
         bool inited = false;
         while (!inited && i < 3)
         {
+            Serial.println("Initializing BME680...");
+            Serial.flush();
             if (bme.begin())
             {
                 inited = true;
@@ -31,6 +33,7 @@ namespace BME
             else
             {
                 Serial.println("Could not detect BME680 sensor, please check wiring!");
+                // Serial.flush();
                 digitalWrite(LED_PIN, HIGH);
                 delay(100);
                 digitalWrite(LED_PIN, LOW);

@@ -1,4 +1,5 @@
 #define ADAFRUIT_1918 A0
+#include <Arduino.h>
 
 namespace GUVA
 {

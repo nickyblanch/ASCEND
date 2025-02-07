@@ -5,6 +5,7 @@
 ///////////////////////////////////////////////////////////////
 
 #include <Arduino.h>
+#include <Wire.h>
 #include "CNS.hpp"
 
 CNS cns;
@@ -12,8 +13,11 @@ CNS cns;
 void setup()
 {
     Serial.begin(9600);
+    Wire.begin();
+    Wire.setClock(400000);
+    SPI.begin();
 
-    // cns.initializeSD();
+    cns.initializeSD();
     cns.initializeSensors();
     cns.printOperationalSensors();
     cns.printFailedSensors();
@@ -24,6 +28,6 @@ void loop()
 {
     cns.readSensorData();
     cns.printSensorData();
-    // cns.refreshSD();
+    cns.refreshSD();
     delay(1000);
 }

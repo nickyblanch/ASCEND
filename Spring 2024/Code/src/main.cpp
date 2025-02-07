@@ -9,7 +9,7 @@
 #include "BME680.hpp"
 #include "LSM9DS1.hpp"
 #include "Gravity.hpp"
-// #include "GUVA.hpp"
+#include "GUVA.hpp"
 #include "geiger.hpp"
 
 File myFile;
@@ -21,20 +21,22 @@ void setup()
   // pinMode(SIGN_PIN, INPUT);
   // pinMode(NOISE_PIN, INPUT);
 
-  Serial.begin(115200);
-  Wire.begin();
+  Serial.begin(9600);
+  // Wire.begin();
   Serial.println("Begin boot!");
-  // Wire.setClock(400000); THIS LINE WAS THE PROBLEM!!!!!!!
+  // Wire.setClock(400000); // THIS LINE WAS THE PROBLEM!!!!!!!
 
   uSD::setup();
 
   BME::init();
   LSM::init();
-  RAD::init();
+  // RAD::init();
   Gravity::init();
 
   // put the meaning of values as headers in the file
-  log("millis,bmetemp(*C),bmepres(Pa),bmehum(%),bmegas_res(KOhm),bmealt(m),accX (mg),accY (mg),accZ (mg),gyrX (deg/sec),gyrY (deg/sec),gyrZ (deg/sec),magX (uT),magY (uT),magZ (uT),UV [0-1023],radiation count,rad count per min,uSv/h,uSv/h error,noise events,ozone concentration,\n");
+  // log("millis,bmetemp(*C),bmepres(Pa),bmehum(%),bmegas_res(KOhm),bmealt(m),accX (mg),accY (mg),accZ (mg),gyrX (deg/sec),gyrY (deg/sec),gyrZ (deg/sec),magX (uT),magY (uT),magZ (uT),UV [0-1023],radiation count,rad count per min,uSv/h,uSv/h error,noise events,ozone concentration,\n");
+  log("millis,bmetemp(*C),bmepres(Pa),bmehum(%),bmegas_res(KOhm),bmealt(m),accX (mg),accY (mg),accZ (mg),gyrX (deg/sec),gyrY (deg/sec),gyrZ (deg/sec),magX(uT),magY(uT),magZ(uT),ozone concentration,\n");
+
   // log_file.close();
 }
 
@@ -47,7 +49,7 @@ void loop()
   auto bme_reading = BME::read();
   auto icm_reading = LSM::read();
   // auto guva_reading = GUVA::read();
-  RAD::read();
+  // RAD::read();
   auto gravity_reading = Gravity::read();
 
   log("\n"); // newline

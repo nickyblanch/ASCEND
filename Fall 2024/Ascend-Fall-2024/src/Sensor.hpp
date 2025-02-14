@@ -19,6 +19,19 @@ public:
     virtual bool isOperational();     // Check if sensor is operational
     virtual void readData() = 0;      // Read sensor data
     virtual double *getData() = 0;    // Retrieve data in string format for logging/telemetry
+    double getNamedData(String name)  // Retrieve data by name
+    {
+        String *descriptors = getDescriptors();
+        double *data = getData();
+        for (int i = 0; i < getDataCount(); i++)
+        {
+            if (descriptors[i] == name)
+            {
+                return data[i];
+            }
+        }
+        return -1;
+    }
 };
 
 #endif

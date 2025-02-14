@@ -8,11 +8,11 @@
 #include "Sensor.hpp"
 #include "SD.hpp"
 #include "ExampleSensor.hpp"
-#include "ExampleSensor2.hpp"
+// #include "ExampleSensor2.hpp"
 #include "SpectralSensor.hpp"
 #include "UVSensor.hpp"
 #include "IMU.hpp"
-#include "Ozone.hpp"
+// #include "Ozone.hpp"
 // #include "BME680.hpp"
 
 class CNS
@@ -26,7 +26,7 @@ private:
         new UVSensor(),
         new IMU(),
         new SpectralSensor(),
-        new Ozone(),
+        // new Ozone(),
     };
 
     uSD sd;

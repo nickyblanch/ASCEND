@@ -1,81 +1,71 @@
 ///////////////////////////////////////////////////////////////
 // UA SEDS ASCEND FALL 2024
 // AUTHORS: Colin Brown
-// PURPOSE: 8+2 Channel Spectral Sensor
+// PURPOSE: See how to implement a sensor
 ///////////////////////////////////////////////////////////////
 
 #include <Sensor.hpp>
-#include <Waveshare_AS7341.h>
+#include "AS726X.h"
+
+/*
+  This is a library written for the AS726X Spectral Sensor (Visible or IR) with I2C firmware
+  specially loaded. SparkFun sells these at its website: www.sparkfun.com
+
+  Written by Nathan Seidle & Andrew England @ SparkFun Electronics, July 12th, 2017
+
+  https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X
+
+  Do you like this library? Help support SparkFun. Buy a board!
+
+  Development environment specifics:
+  Arduino IDE 1.8.1
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 class SpectralSensor : public Sensor
 {
 private:
-    double data[10] = {0.0};
-    String descriptors[10] = {"channel1(405-425nm)",
-                              "channel2(435-455nm)",
-                              "channel3(470-490nm)",
-                              "channel4(505-525nm)",
-                              "channel5(545-565nm)",
-                              "channel6(580-600nm)",
-                              "channel7(620-640nm)",
-                              "channel8(670-690nm)",
-                              "Clear",
-                              "NIR"};
+    AS726X sensor; // Creates the sensor object
+    double data[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    String descriptors[6] = {"R", "O", "Y", "G", "B", "V"};
     bool operational = false;
-
-    sModeOneData_t data1;
-    sModeTwoData_t data2;
 
 public:
     SpectralSensor()
     {
     }
-    int getDataCount()
-    {
-        return 10;
-    }
     int init()
     {
-        // Initialize sensor
-        Serial.println("Initializing Spectral Sensor");
-        DEV_ModuleInit();
-        Serial.print("IIC ready! Now start initializing AS7341!\r\n");
-        AS7341_Init(eSpm);
-        AS7341_ATIME_config(100);
-        AS7341_ASTEP_config(999);
-        AS7341_AGAIN_config(6);
-        AS7341_EnableLED(true); // LED Enable
-
-        operational = true;
-        return 0; // Return 0 if successful
+        operational = sensor.begin(); // Initializes the sensor with non default values
+        return operational ? 0 : -1;  // Return 0 if successful
     };
+    int getDataCount()
+    {
+        return 6;
+    }
     bool isOperational()
     {
         return operational;
     }
     void readData()
     {
-        // Read sensor data
-        Serial.println("Reading Example Sensor Data");
-        AS7341_ControlLed(false, 10); // Turn on or off the LED and set the brightness of the LED
-        AS7341_startMeasure(eF1F4ClearNIR);
-        data1 = AS7341_ReadSpectralDataOne();
-
-        AS7341_startMeasure(eF5F8ClearNIR);
-        data2 = AS7341_ReadSpectralDataTwo();
+        data[0] = sensor.getCalibratedRed();
+        data[1] = sensor.getCalibratedOrange();
+        data[2] = sensor.getCalibratedYellow();
+        data[3] = sensor.getCalibratedGreen();
+        data[4] = sensor.getCalibratedBlue();
+        data[5] = sensor.getCalibratedViolet();
     }
     double *getData()
     {
-        data[0] = data1.channel1;
-        data[1] = data1.channel2;
-        data[2] = data1.channel3;
-        data[3] = data1.channel4;
-        data[4] = data2.channel5;
-        data[5] = data2.channel6;
-        data[6] = data2.channel7;
-        data[7] = data2.channel8;
-        data[8] = data2.CLEAR;
-        data[9] = data2.NIR;
+        // Return our data to be used in the main loop
         return data;
     }
     String getName()

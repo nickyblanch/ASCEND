@@ -22,9 +22,11 @@ public:
     int init()
     {
         // Dont have to do anything else for this example
-        operational = SGP40_Init() == 0;
-
-        return operational ? 0 : -1;
+        if (SGP40_Init() != 0)
+        {
+            Serial.print("init err!!!");
+            return 0;
+        }
     };
 
     int getDataCount()

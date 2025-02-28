@@ -18,10 +18,10 @@ private:
 public:
     IRSensor()
     {
+        muxIndex = 0; // Set the MUX index for this sensor
     }
     int init()
     {
-        // Dont have to do anything else for this example
         operational = sensor.begin();        // Initializes the sensor with non default values
         return operational == true ? 0 : -1; // Return 0 if successful
     };
@@ -35,6 +35,11 @@ public:
     }
     void readData()
     {
+        sensor.takeMeasurements();
+    }
+    double *getData()
+    {
+        // Return our data to be used in the main loop
 
         data[0] = sensor.getCalibratedR();
         data[1] = sensor.getCalibratedS();
@@ -42,10 +47,6 @@ public:
         data[3] = sensor.getCalibratedU();
         data[4] = sensor.getCalibratedV();
         data[5] = sensor.getCalibratedW();
-    }
-    double *getData()
-    {
-        // Return our data to be used in the main loop
         return data;
     }
     String getName()

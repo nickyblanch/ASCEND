@@ -6,6 +6,11 @@
 
 #include <SD.hpp>
 
+uSD::uSD(bool debugMode)
+{
+    this->debugMode = debugMode;
+}
+
 int uSD::setup()
 {
 
@@ -54,6 +59,12 @@ int uSD::loop()
 
 int uSD::write_data(char *data)
 {
+    if (debugMode)
+    {
+        Serial.print(data);
+        return 0;
+    }
+
     // if the file opened okay, write to it:
     if (myFile)
     {

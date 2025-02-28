@@ -24,7 +24,7 @@ public:
         operational = uvSensor.begin();
         if (operational)
         {
-            operational = uvSensor.setMeasurementMode(MEAS_MODE_CMD);
+            operational = uvSensor.prepareMeasurement(MEAS_MODE_CMD);
         }
         return operational ? 0 : -1;
     };

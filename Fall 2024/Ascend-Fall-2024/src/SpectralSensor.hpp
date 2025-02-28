@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////
 // UA SEDS ASCEND FALL 2024
 // AUTHORS: Colin Brown
-// PURPOSE: See how to implement a sensor
+// PURPOSE: Read the spectrum of light
 ///////////////////////////////////////////////////////////////
 
 #include <Sensor.hpp>
@@ -40,6 +40,7 @@ private:
 public:
     SpectralSensor()
     {
+        muxIndex = 1; // Set the MUX index for this sensor
     }
     int init()
     {
@@ -56,16 +57,18 @@ public:
     }
     void readData()
     {
+        sensor.takeMeasurements();
+    }
+    double *getData()
+    {
+        // Return our data to be used in the main loop
         data[0] = sensor.getCalibratedRed();
         data[1] = sensor.getCalibratedOrange();
         data[2] = sensor.getCalibratedYellow();
         data[3] = sensor.getCalibratedGreen();
         data[4] = sensor.getCalibratedBlue();
         data[5] = sensor.getCalibratedViolet();
-    }
-    double *getData()
-    {
-        // Return our data to be used in the main loop
+
         return data;
     }
     String getName()

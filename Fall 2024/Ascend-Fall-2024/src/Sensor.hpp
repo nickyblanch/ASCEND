@@ -12,6 +12,7 @@
 class Sensor
 {
 public:
+    int muxIndex = -1;                // Index for the MUX
     virtual String getName();         // Sensor name
     virtual String *getDescriptors(); // Array of sensor descriptors
     virtual int getDataCount();       // Number of data points

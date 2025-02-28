@@ -17,6 +17,8 @@ class uSD
     char filename[25];
 
 public:
+    bool debugMode = false;
+    uSD(bool debugMode = false);
     int setup();
 
     int loop();

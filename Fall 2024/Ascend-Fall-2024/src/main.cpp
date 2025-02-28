@@ -12,12 +12,13 @@ CNS cns;
 
 void setup()
 {
-    Serial.begin(9600);
+    Serial.begin(115200);
     Wire.begin();
     Wire.setClock(400000);
     SPI.begin();
 
-    cns.initializeSD();
+    // cns.initializeSD();
+    cns.initializeMux();
     cns.initializeSensors();
     cns.printOperationalSensors();
     cns.printFailedSensors();
@@ -28,6 +29,6 @@ void loop()
 {
     cns.readSensorData();
     cns.printSensorData();
-    cns.refreshSD();
+    // cns.refreshSD();
     delay(1000);
 }

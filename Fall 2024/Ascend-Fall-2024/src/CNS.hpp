@@ -5,12 +5,15 @@
 ///////////////////////////////////////////////////////////////
 
 #include <Arduino.h>
+#include <SparkFun_I2C_Mux_Arduino_Library.h>
+
 #include "Sensor.hpp"
 #include "SD.hpp"
 #include "ExampleSensor.hpp"
 #include "UVSensor.hpp"
 #include "IMU.hpp"
 #include "SpectralSensor.hpp"
+#include "IRSensor.hpp"
 #include "AirQualitySensor.hpp"
 #include "TempSensor.hpp"
 
@@ -18,21 +21,26 @@ class CNS
 {
 private:
     /* data */
-    Sensor *sensors[5] = {
-        new UVSensor(),
-        new IMU(),
+    Sensor *sensors[2] = {
+        // new UVSensor(),
+        // new IMU(),
         new SpectralSensor(),
-        new AirQualitySensor(),
-        new TempSensor(),
+        // new AirQualitySensor(),
+        // new TempSensor(),
+        new IRSensor(),
     };
 
     uSD sd;
     int LED_PIN = 13;
+    QWIICMUX mux;
+    void enableMuxPort(int port);
+    void disableMuxPort(int port);
 
 public:
     CNS();
 
     void initializeSD();
+    void initializeMux();
     void initializeSensors();
     void printOperationalSensors();
     void printFailedSensors();

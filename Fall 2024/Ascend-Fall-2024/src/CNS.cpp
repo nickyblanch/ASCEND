@@ -18,6 +18,42 @@ void CNS::initializeSD()
     {
         delay(1000);
     }
+    sd.debugMode = true;
+}
+
+void CNS::initializeMux()
+{
+    // Initialize the MUX
+    int tries = 0;
+    while (mux.begin() == false && tries < 3)
+    {
+        Serial.println("Failed to initialize MUX, retrying in 1 second");
+        delay(1000);
+        tries++;
+    }
+    // dIsable all ports
+    for (byte x = 0; x <= 7; x++)
+    {
+        disableMuxPort(x);
+    }
+}
+
+void CNS::enableMuxPort(int port)
+{
+
+    // Serial.println("Enabling MUX port " + String(port));
+    if (port >= 0 && port <= 7 && mux.isConnected())
+    {
+        mux.setPort(port);
+    }
+}
+
+void CNS::disableMuxPort(int port)
+{
+    if (port >= 0 && port <= 7 && mux.isConnected())
+    {
+        mux.disablePort(port);
+    }
 }
 
 Sensor *CNS::getSensor(int index)
@@ -42,6 +78,7 @@ void CNS::initializeSensors()
     // Initialize sensors
     for (Sensor *sensor : sensors)
     {
+        enableMuxPort(sensor->muxIndex);
         int tries = 0;
         Serial.println("Initializing: " + sensor->getName());
         Serial.flush();
@@ -99,6 +136,7 @@ void CNS::readSensorData()
     // Tell sensors to read data
     for (Sensor *sensor : sensors)
     {
+        enableMuxPort(sensor->muxIndex);
         if (sensor->isOperational())
             sensor->readData();
     }
@@ -109,6 +147,7 @@ void CNS::printSensorData()
     // Print sensor data
     for (Sensor *sensor : sensors)
     {
+        enableMuxPort(sensor->muxIndex);
         if (sensor->isOperational())
         {
             double *data = sensor->getData();

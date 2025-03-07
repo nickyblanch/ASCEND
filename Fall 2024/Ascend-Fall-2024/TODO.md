@@ -1,3 +1,5 @@
+DONT CLOCK THE WIRE TOO HIGH!!!!!!!!
+
 [BOM Reference](https://docs.google.com/spreadsheets/d/1N5uVJxHqoAoPkoaKqldwrL5gkkNrfWoROLorwC07GB8/edit?gid=0#gid=0)
 
 [X] Implement SD card reader

@@ -1,117 +1,69 @@
-// #include "Arduino.h"
-// #include "bme68xLibrary.h"
+#include "Adafruit_BME680.h"
 
-// #ifndef PIN_CS
-// #define PIN_CS SS
-// #endif
+#define SEALEVELPRESSURE_HPA (1013.25)
 
-// Bme68x bme;
+///////////////////////////////////////////////////////////////
+// UA SEDS ASCEND FALL 2024
+// AUTHORS: Colin Brown
+// PURPOSE: See how to implement a sensor
+///////////////////////////////////////////////////////////////
 
-// /**
-//  * @brief Initializes the sensor and hardware settings
-//  */
-// void setup(void)
-// {
-//     SPI.begin();
-//     Serial.begin(115200);
+#include <Sensor.hpp>
 
-//     while (!Serial)
-//         delay(10);
+class BME680 : public Sensor
+{
+private:
+    Adafruit_BME680 bme;
+    double data[5] = {0.0, 0.0, 0.0, 0.0, 0.0};
+    String descriptors[5] = {"Temperature", "Pressure", "Humidity", "Gas Resistance", "Altitude"};
 
-//     /* initializes the sensor based on SPI library */
-//     bme.begin(PIN_CS, SPI);
+    bool operational = false;
 
-//     if (bme.checkStatus())
-//     {
-//         if (bme.checkStatus() == BME68X_ERROR)
-//         {
-//             Serial.println("Sensor error:" + bme.statusString());
-//             return;
-//         }
-//         else if (bme.checkStatus() == BME68X_WARNING)
-//         {
-//             Serial.println("Sensor Warning:" + bme.statusString());
-//         }
-//     }
+public:
+    BME680()
+    {
+    }
+    int init()
+    {
+        operational = bme.begin();
 
-//     /* Set the default configuration for temperature, pressure and humidity */
-//     bme.setTPH();
-
-//     /* Set the heater configuration to 300 deg C for 100ms for Forced mode */
-//     bme.setHeaterProf(300, 100);
-
-//     Serial.println("TimeStamp(ms), Temperature(deg C), Pressure(Pa), Humidity(%), Gas resistance(ohm), Status");
-// }
-
-// void loop(void)
-// {
-//     bme68xData data;
-
-//     bme.setOpMode(BME68X_FORCED_MODE);
-//     delayMicroseconds(bme.getMeasDur());
-
-//     if (bme.fetchData())
-//     {
-//         bme.getData(data);
-//         Serial.print(String(millis()) + ", ");
-//         Serial.print(String(data.temperature) + ", ");
-//         Serial.print(String(data.pressure) + ", ");
-//         Serial.print(String(data.humidity) + ", ");
-//         Serial.print(String(data.gas_resistance) + ", ");
-//         Serial.println(data.status, HEX);
-//     }
-// }
-
-// ///////////////////////////////////////////////////////////////
-// // UA SEDS ASCEND FALL 2024
-// // AUTHORS: Colin Brown
-// // PURPOSE: See how to implement a sensor
-// ///////////////////////////////////////////////////////////////
-
-// #include <Sensor.hpp>
-
-// class BME680 : public Sensor
-// {
-// private:
-//     double data[1] = {0.0};
-//     String descriptors[1] = {"Example Data"};
-//     bool operational = false;
-
-// public:
-//     BME680()
-//     {
-//     }
-//     int init()
-//     {
-//         // Dont have to do anything else for this example
-//         operational = true;
-//         return 0; // Return 0 if successful
-//     };
-//     int getDataCount()
-//     {
-//         return 1;
-//     }
-//     bool isOperational()
-//     {
-//         return operational;
-//     }
-//     void readData()
-//     {
-//         // Generate random data
-//         data[0] = random(0, 100);
-//     }
-//     double *getData()
-//     {
-//         // Return our data to be used in the main loop
-//         return data;
-//     }
-//     String getName()
-//     {
-//         return "Example Sensor";
-//     }
-//     String *getDescriptors()
-//     {
-//         // Return our descriptors to be used in the main loop
-//         return descriptors;
-//     }
-// };
+        bme.setTemperatureOversampling(BME680_OS_8X);
+        bme.setHumidityOversampling(BME680_OS_2X);
+        bme.setPressureOversampling(BME680_OS_4X);
+        bme.setIIRFilterSize(BME680_FILTER_SIZE_3);
+        bme.setGasHeater(320, 150);  // 320*C for 150 mss
+        return operational ? 0 : -1; // Return 0 if successful
+    };
+    int getDataCount()
+    {
+        return 5;
+    }
+    bool isOperational()
+    {
+        return operational;
+    }
+    void readData()
+    {
+        // Generate random data
+        bme.performReading();
+    }
+    double *getData()
+    {
+        // Return our data to be used in the main loop
+        data[0] = bme.temperature;
+        data[1] = bme.pressure;
+        data[2] = bme.humidity;
+        data[3] = bme.gas_resistance / 1000.0;
+        data[4] = bme.readAltitude(SEALEVELPRESSURE_HPA);
+        return data;
+    }
+    String getName()
+    {
+        return "Example Sensor";
+    }
+    String *getDescriptors()
+    {
+        // Return our descriptors to be used in the main loop
+        return descriptors;
+    }
+};

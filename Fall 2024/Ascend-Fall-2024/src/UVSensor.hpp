@@ -6,6 +6,7 @@
 
 #include <Sensor.hpp>
 #include <SparkFun_AS7331.h>
+// #include <Sparkfun_Toolkit.h>
 
 class UVSensor : public Sensor
 {
@@ -38,13 +39,9 @@ public:
     }
     void readData()
     {
-        if (kSTkErrOk != uvSensor.setStartState(true))
-        {
-            Serial.println("Error setting start state.");
-        }
+        uvSensor.setStartState(true);
         delay(2 + uvSensor.getConversionTimeMillis());
-        if (kSTkErrOk != uvSensor.readAllUV())
-            Serial.println("Error reading UV.");
+        uvSensor.readAllUV();
 
         data[0] = uvSensor.getUVA();
         data[1] = uvSensor.getUVB();

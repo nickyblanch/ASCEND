@@ -59,7 +59,7 @@ public:
     }
     String getName()
     {
-        return "Example Sensor";
+        return "BME 680";
     }
     String *getDescriptors()
     {

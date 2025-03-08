@@ -9,25 +9,25 @@
 
 #include "Sensor.hpp"
 #include "SD.hpp"
-#include "ExampleSensor.hpp"
+// #include "ExampleSensor.hpp"
 #include "UVSensor.hpp"
 #include "IMU.hpp"
 #include "SpectralSensor.hpp"
 #include "IRSensor.hpp"
-#include "AirQualitySensor.hpp"
+// #include "AirQualitySensor.hpp"
 #include "TempSensor.hpp"
-#include "BME680.hpp"
+// #include "BME680.hpp"
 
 class CNS
 {
 private:
     /* data */
-    Sensor *sensors[2] = {
+    Sensor *sensors[5] = {
         new UVSensor(),
         new IMU(),
-        // new SpectralSensor(),
-        // new TempSensor(),
-        // new IRSensor(),
+        new SpectralSensor(),
+        new TempSensor(),
+        new IRSensor(),
         // new BME680(),
     };
 

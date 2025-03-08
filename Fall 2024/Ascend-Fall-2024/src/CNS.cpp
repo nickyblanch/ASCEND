@@ -18,7 +18,7 @@ void CNS::initializeSD()
     {
         delay(1000);
     }
-    sd.debugMode = true;
+    sd.debugMode = false;
 }
 
 void CNS::initializeMux()
@@ -124,11 +124,12 @@ void CNS::createCSVHeaders()
             int dataCount = sensor->getDataCount();
             for (int i = 0; i < dataCount; i++)
             {
-                Serial.print(sensor->getName() + " (" + descriptors[i] + "), ");
+                // Serial.print(sensor->getName() + " (" + descriptors[i] + "), ");
+                sd.write_data((sensor->getName() + " (" + descriptors[i] + "), ").c_str());
             }
         }
     }
-    Serial.println();
+    sd.write_data("\n");
 }
 
 void CNS::readSensorData()
@@ -154,11 +155,12 @@ void CNS::printSensorData()
             int dataCount = sensor->getDataCount();
             for (int i = 0; i < dataCount; i++)
             {
-                Serial.print(String(data[i]) + ", ");
+                sd.write_data(data[i]);
+                sd.write_data(", ");
             }
         }
     }
-    Serial.println();
+    sd.write_data("\n");
 }
 
 void CNS::refreshSD()

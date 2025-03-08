@@ -23,7 +23,7 @@ public:
 
     int loop();
 
-    int write_data(char *data);
+    int write_data(const char *data);
 
     // Overload to allow calling with an integer
     int write_data(long num);

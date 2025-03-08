@@ -57,7 +57,7 @@ int uSD::loop()
     return 0;
 }
 
-int uSD::write_data(char *data)
+int uSD::write_data(const char *data)
 {
     if (debugMode)
     {

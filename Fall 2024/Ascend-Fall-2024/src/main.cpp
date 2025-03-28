@@ -14,7 +14,7 @@ void setup()
 {
     Serial.begin(115200);
     Wire.begin();
-    Wire.setClock(100000);
+    Wire.setClock(25000);
     SPI.begin();
 
     cns.initializeSD();

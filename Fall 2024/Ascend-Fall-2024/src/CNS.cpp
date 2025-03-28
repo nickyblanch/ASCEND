@@ -27,7 +27,7 @@ void CNS::initializeMux()
     int tries = 0;
     while (mux.begin() == false && tries < 3)
     {
-        Serial.println("Failed to initialize MUX, retrying in 1 second");
+        Serial.println("MUX B");
         delay(1000);
         tries++;
     }
@@ -80,11 +80,11 @@ void CNS::initializeSensors()
     {
         enableMuxPort(sensor->muxIndex);
         int tries = 0;
-        Serial.println("Initializing: " + sensor->getName());
+        Serial.println("I: " + sensor->getName());
         Serial.flush();
         while (sensor->init() != 0 && tries < 3)
         {
-            Serial.println(sensor->getName() + ": Failed to initialize sensor, retrying in 1 second");
+            Serial.println(sensor->getName() + " : F");
             // Force write to Serial
             Serial.flush();
             tries++;
@@ -98,7 +98,7 @@ void CNS::printOperationalSensors()
     // Print operational sensors
     for (Sensor *sensor : sensors)
         if (sensor->isOperational())
-            Serial.println("Operational: " + sensor->getName());
+            Serial.println("G: " + sensor->getName());
 }
 
 void CNS::printFailedSensors()
@@ -108,7 +108,7 @@ void CNS::printFailedSensors()
     {
         if (!sensor->isOperational())
         {
-            Serial.println("FAILED: " + sensor->getName());
+            Serial.println("F: " + sensor->getName());
         }
     }
 }

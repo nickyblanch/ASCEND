@@ -51,7 +51,7 @@ public:
     }
     String getName()
     {
-        return "IR Sensor";
+        return "IR";
     }
     String *getDescriptors()
     {

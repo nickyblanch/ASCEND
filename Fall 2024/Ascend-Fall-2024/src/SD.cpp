@@ -14,11 +14,11 @@ uSD::uSD(bool debugMode)
 int uSD::setup()
 {
 
-    Serial.println("Initializing SD card...");
+    // Serial.println("Initializing SD card...");
 
     while (!SD.begin(SD_PIN))
     {
-        Serial.println("SD: initialization failed!");
+        Serial.println("SD B");
         return -1;
     }
     int file_num = 0;
@@ -27,18 +27,18 @@ int uSD::setup()
     sprintf(filename, "log%d.csv", file_num);
     while (SD.exists(filename))
     {
-        Serial.print(filename);
-        Serial.println(" exists, trying next");
+        // Serial.print(filename);
+        // Serial.println(" exists, trying next");
 
         file_num++;
         sprintf(filename, "log%d.csv", file_num);
     }
 
-    Serial.print("Unnused file name found: ");
+    // Serial.print("Unnused file name found: ");
     Serial.println(filename);
     myFile = SD.open(filename, FILE_WRITE);
 
-    Serial.println("SD initialization done.");
+    // Serial.println("SD initialization done.");
     return 0;
 }
 
@@ -49,7 +49,7 @@ int uSD::loop()
     myFile = SD.open(filename, FILE_WRITE);
     if (!myFile)
     {
-        Serial.print("I have no mouth and I must scream (couldnt open): ");
+        Serial.print("SD B");
         Serial.println(filename);
 
         return setup();

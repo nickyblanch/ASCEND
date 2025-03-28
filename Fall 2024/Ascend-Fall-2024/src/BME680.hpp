@@ -15,7 +15,7 @@ class BME680 : public Sensor
 private:
     Adafruit_BME680 bme;
     double data[5] = {0.0, 0.0, 0.0, 0.0, 0.0};
-    String descriptors[5] = {"Temperature", "Pressure", "Humidity", "Gas Resistance", "Altitude"};
+    String descriptors[5] = {"Temp", "Pres", "Hum", "Res", "Alt"};
 
     bool operational = false;
 
@@ -59,7 +59,7 @@ public:
     }
     String getName()
     {
-        return "BME 680";
+        return "BME";
     }
     String *getDescriptors()
     {

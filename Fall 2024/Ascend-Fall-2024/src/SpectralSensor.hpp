@@ -73,7 +73,7 @@ public:
     }
     String getName()
     {
-        return "Spectral Sensor";
+        return "Vis";
     }
     String *getDescriptors()
     {

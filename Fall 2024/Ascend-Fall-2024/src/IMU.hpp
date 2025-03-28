@@ -12,7 +12,8 @@ class IMU : public Sensor
 {
 private:
     double data[9] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-    String descriptors[9] = {"X Acc", "Y Acc", "Z Acc", "X Gyro", "Y Gyro", "Z Gyro", "X Mag", "Y Mag", "Z Mag"};
+    String descriptors[9] = {"X A", "Y A", "Z A", "X G", "Y G", "Z G", "X M", "Y M", "Z M"};
+    // A - Acceleration, G - Gyroscope, M - Magnetometer
     bool operational = false;
 
     ICM_20948_I2C myICM;

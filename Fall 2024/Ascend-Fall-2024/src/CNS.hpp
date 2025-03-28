@@ -15,8 +15,8 @@
 #include "SpectralSensor.hpp"
 #include "IRSensor.hpp"
 // #include "AirQualitySensor.hpp"
-#include "TempSensor.hpp"
-// #include "BME680.hpp"
+// #include "TempSensor.hpp"
+#include "BME680.hpp"
 
 class CNS
 {
@@ -26,9 +26,9 @@ private:
         new UVSensor(),
         new IMU(),
         new SpectralSensor(),
-        new TempSensor(),
+        // new TempSensor(),
         new IRSensor(),
-        // new BME680(),
+        new BME680(),
     };
 
     uSD sd;

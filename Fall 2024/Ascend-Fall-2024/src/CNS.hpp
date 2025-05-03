@@ -26,7 +26,6 @@ private:
         new UVSensor(),
         new IMU(),
         new SpectralSensor(),
-        // new TempSensor(),
         new IRSensor(),
         new BME680(),
     };

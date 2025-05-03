@@ -103,13 +103,18 @@ const zAxis = ref(null);
 const blurAmount = ref(0);
 const derivative = ref(0);
 
-const csv_file = ref("Spring_2023.csv");
+const csv_file = ref("2024_Fall.csv");
 const line = ref(false);
 
 const fileInput = document.createElement("input");
 fileInput.type = "file";
 
-const files = ["Fall_2023.csv", "Spring_2023.csv", "Fall_2022.csv"];
+const files = [
+  "2022_Fall.csv",
+  "2023_Spring.csv",
+  "2023_Fall.csv",
+  "2024_Fall.csv",
+];
 
 const updateSmoothing = (newVal) => {
   console.log(newVal);

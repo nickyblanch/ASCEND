@@ -98,7 +98,7 @@ void CNS::printOperationalSensors()
     // Print operational sensors
     for (Sensor *sensor : sensors)
         if (sensor->isOperational())
-            Serial.println("G: " + sensor->getName());
+            Serial.println("G:" + sensor->getName());
 }
 
 void CNS::printFailedSensors()
@@ -108,7 +108,7 @@ void CNS::printFailedSensors()
     {
         if (!sensor->isOperational())
         {
-            Serial.println("F: " + sensor->getName());
+            Serial.println("F:" + sensor->getName());
         }
     }
 }
@@ -116,6 +116,7 @@ void CNS::printFailedSensors()
 void CNS::createCSVHeaders()
 {
     // Create csv file headers
+    sd.write_data("S,");
     for (Sensor *sensor : sensors)
     {
         if (sensor->isOperational())
@@ -125,7 +126,7 @@ void CNS::createCSVHeaders()
             for (int i = 0; i < dataCount; i++)
             {
                 // Serial.print(sensor->getName() + " (" + descriptors[i] + "), ");
-                sd.write_data((sensor->getName() + " (" + descriptors[i] + "), ").c_str());
+                sd.write_data((sensor->getName() + "(" + descriptors[i] + "),").c_str());
             }
         }
     }
@@ -145,6 +146,8 @@ void CNS::readSensorData()
 
 void CNS::printSensorData()
 {
+    sd.write_data(millis() / 1000.0);
+    sd.write_data(",");
     // Print sensor data
     for (Sensor *sensor : sensors)
     {

@@ -12,7 +12,7 @@ class IMU : public Sensor
 {
 private:
     double data[9] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-    String descriptors[9] = {"X A", "Y A", "Z A", "X G", "Y G", "Z G", "X M", "Y M", "Z M"};
+    String descriptors[9] = {"XA", "YA", "ZA", "XG", "YG", "ZG", "XM", "YM", "ZM"};
     // A - Acceleration, G - Gyroscope, M - Magnetometer
     bool operational = false;
 

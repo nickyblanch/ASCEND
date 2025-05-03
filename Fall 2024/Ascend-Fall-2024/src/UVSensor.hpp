@@ -64,7 +64,7 @@ public:
     }
     String getName()
     {
-        return "UV Sensor";
+        return "UV";
     }
     String *getDescriptors()
     {

@@ -24,14 +24,14 @@ int uSD::setup()
     int file_num = 0;
 
     // Sequentially check for the next available file name
-    sprintf(filename, "log%d.csv", file_num);
+    sprintf(filename, "%d.csv", file_num);
     while (SD.exists(filename))
     {
         // Serial.print(filename);
         // Serial.println(" exists, trying next");
 
         file_num++;
-        sprintf(filename, "log%d.csv", file_num);
+        sprintf(filename, "%d.csv", file_num);
     }
 
     // Serial.print("Unnused file name found: ");
@@ -79,22 +79,22 @@ int uSD::write_data(const char *data)
 }
 
 // Overload to allow calling with an integer
-int uSD::write_data(long num)
-{
-    char buffer[25];
-    sprintf(buffer, "%ld", num);
-    return write_data(buffer);
-}
+// int uSD::write_data(long num)
+// {
+//     char buffer[25];
+//     sprintf(buffer, "%ld", num);
+//     return write_data(buffer);
+// }
 
-int uSD::write_data(int num)
-{
-    return write_data((long)num);
-}
+// int uSD::write_data(int num)
+// {
+//     return write_data((long)num);
+// }
 
-int uSD::write_data(long unsigned int num)
-{
-    return write_data((long)num);
-}
+// int uSD::write_data(long unsigned int num)
+// {
+//     return write_data((long)num);
+// }
 
 // Overload to allow calling with a double
 int uSD::write_data(double num)

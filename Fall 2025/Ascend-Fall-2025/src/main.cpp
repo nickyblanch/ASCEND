@@ -27,6 +27,7 @@ void setup()
 
 void loop()
 {
+    cns.updateNeopixelRing();
     cns.readSensorData();
     cns.printSensorData();
     cns.refreshSD();

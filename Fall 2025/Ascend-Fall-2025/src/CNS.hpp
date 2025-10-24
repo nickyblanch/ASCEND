@@ -17,6 +17,7 @@
 // #include "AirQualitySensor.hpp"
 // #include "TempSensor.hpp"
 #include "BME680.hpp"
+#include "NeopixelRing.hpp"
 
 class CNS
 {
@@ -33,7 +34,9 @@ private:
 
     uSD sd;
     int LED_PIN = 13;
+    int sensorsError = 0;
     QWIICMUX mux;
+    NeopixelRing neopixelRing;
     void enableMuxPort(int port);
     void disableMuxPort(int port);
 
@@ -54,4 +57,5 @@ public:
     void printSensorData();
     void writeSensorData();
     void refreshSD();
+    void updateNeopixelRing();
 };

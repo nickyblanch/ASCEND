@@ -75,6 +75,7 @@ Sensor *CNS::getSensorByName(String name)
 
 void CNS::initializeSensors()
 {
+    updateNeopixelRing();
     // Initialize sensors
     for (Sensor *sensor : sensors)
     {
@@ -89,6 +90,10 @@ void CNS::initializeSensors()
             Serial.flush();
             tries++;
             delay(1000);
+        }
+        if (tries >= 3)
+        {
+            sensorsError++;
         }
     }
 }
@@ -170,4 +175,17 @@ void CNS::refreshSD()
 {
     // Refresh the SD card
     sd.loop();
+}
+
+void CNS::updateNeopixelRing()
+{
+    if (sensorsError > 0)
+    {
+        neopixelRing.setStatus(NeopixelRing::Status::ERROR);
+    }
+    else
+    {
+        neopixelRing.setStatus(NeopixelRing::Status::ON);
+    }
+    neopixelRing.update();
 }

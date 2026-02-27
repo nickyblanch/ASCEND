@@ -15,7 +15,7 @@ class BMP390 : public Sensor
 private:
     Adafruit_BMP3XX bmp;
     double data[3] = {0.0, 0.0, 0.0};
-    String descriptors[3] = {"Temp", "Pres", "Alt"};
+    String descriptors[3] = {"Temperature (C)", "Pressure (Pa)", "Altitude (m)"};
 
     bool operational = false;
 

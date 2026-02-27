@@ -11,7 +11,7 @@ class INA260 : public Sensor
 {
 private:
     double data[3] = {0.0, 0.0, 0.0};
-    String descriptors[3] = {"Current", "Voltage", "Power"};
+    String descriptors[3] = {"Current (mA)", "Voltage (mV)", "Power (m  W)"};
     bool operational = false;
 
     Adafruit_INA260 ina260 = Adafruit_INA260();
@@ -24,10 +24,7 @@ public:
     {
         // Dont have to do anything else for this example
         operational = ina260.begin();
-        if (operational)
-            return 0; // Return 0 if successful
-        if (!operational)
-            return -1; // Return -1 if failed
+        return operational ? 0 : -1;
     };
     int getDataCount()
     {

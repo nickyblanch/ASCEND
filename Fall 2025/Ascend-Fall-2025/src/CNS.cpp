@@ -17,7 +17,11 @@ void CNS::initializeSD()
     while (sd.setup() != 0)
     {
         delay(1000);
+        neopixelRing.setStatus(NeopixelRing::Status::SD_ERROR);
+        updateNeopixelRing();
     }
+    neopixelRing.setStatus(NeopixelRing::Status::BOOT);
+    updateNeopixelRing();
     sd.debugMode = false;
 }
 
@@ -27,8 +31,8 @@ void CNS::initializeMux()
     int tries = 0;
     while (mux.begin() == false && tries < 3)
     {
-        Serial.println("MUX B");
-        delay(1000);
+        Serial.println("MUX Failed to Begin");
+        delay(500);
         tries++;
     }
     // dIsable all ports
@@ -73,28 +77,36 @@ Sensor *CNS::getSensorByName(String name)
     return nullptr;
 }
 
+void CNS::initializeNeopixelRing()
+{
+
+    neopixelRing.begin();
+    neopixelRing.setStatus(NeopixelRing::Status::BOOT);
+    updateNeopixelRing();
+}
+
 void CNS::initializeSensors()
 {
-    updateNeopixelRing();
     // Initialize sensors
     for (Sensor *sensor : sensors)
     {
         enableMuxPort(sensor->muxIndex);
         int tries = 0;
-        Serial.println("I: " + sensor->getName());
+        Serial.println("Initializing: " + sensor->getName());
         Serial.flush();
         while (sensor->init() != 0 && tries < 3)
         {
-            Serial.println(sensor->getName() + " : F");
+            Serial.println(sensor->getName() + " : Failed once, retrying...");
             // Force write to Serial
             Serial.flush();
             tries++;
-            delay(1000);
+            delay(500);
         }
-        if (tries >= 3)
-        {
-            sensorsError++;
-        }
+    }
+    Serial.println(sensorsError);
+    if (sensorsError == 0)
+    {
+        neopixelRing.setStatus(NeopixelRing::Status::ON);
     }
 }
 
@@ -103,7 +115,7 @@ void CNS::printOperationalSensors()
     // Print operational sensors
     for (Sensor *sensor : sensors)
         if (sensor->isOperational())
-            Serial.println("G:" + sensor->getName());
+            Serial.println("Operational:" + sensor->getName());
 }
 
 void CNS::printFailedSensors()
@@ -113,7 +125,7 @@ void CNS::printFailedSensors()
     {
         if (!sensor->isOperational())
         {
-            Serial.println("F:" + sensor->getName());
+            Serial.println("Failed to intitialize:" + sensor->getName());
         }
     }
 }
@@ -121,7 +133,7 @@ void CNS::printFailedSensors()
 void CNS::createCSVHeaders()
 {
     // Create csv file headers
-    sd.write_data("S,");
+    sd.write_data("Milliseconds,");
     for (Sensor *sensor : sensors)
     {
         if (sensor->isOperational())
@@ -179,13 +191,5 @@ void CNS::refreshSD()
 
 void CNS::updateNeopixelRing()
 {
-    if (sensorsError > 0)
-    {
-        neopixelRing.setStatus(NeopixelRing::Status::ERROR);
-    }
-    else
-    {
-        neopixelRing.setStatus(NeopixelRing::Status::ON);
-    }
     neopixelRing.update();
 }

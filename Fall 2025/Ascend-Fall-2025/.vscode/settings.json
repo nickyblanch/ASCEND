@@ -1,3 +1,23 @@
 {
-	"java.project.sourcePaths": ["lib/SGP40"]
+	"java.project.sourcePaths": ["lib/SGP40"],
+	"files.associations": {
+		"*.test": "cpp",
+		"array": "cpp",
+		"chrono": "cpp",
+		"deque": "cpp",
+		"list": "cpp",
+		"string": "cpp",
+		"unordered_map": "cpp",
+		"vector": "cpp",
+		"string_view": "cpp",
+		"memory": "cpp",
+		"random": "cpp",
+		"format": "cpp",
+		"initializer_list": "cpp",
+		"mutex": "cpp",
+		"span": "cpp",
+		"text_encoding": "cpp",
+		"thread": "cpp",
+		"regex": "cpp"
+	}
 }

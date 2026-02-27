@@ -18,7 +18,7 @@ int uSD::setup()
 
     while (!SD.begin(SD_PIN))
     {
-        Serial.println("SD B");
+        Serial.println("SD Failed to Connect");
         return -1;
     }
     int file_num = 0;
@@ -49,7 +49,7 @@ int uSD::loop()
     myFile = SD.open(filename, FILE_WRITE);
     if (!myFile)
     {
-        Serial.print("SD B");
+        Serial.print("SD Failed to open File: ");
         Serial.println(filename);
 
         return setup();

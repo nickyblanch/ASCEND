@@ -7,14 +7,18 @@ public:
     {
         OFF,
         ON,
-        ERROR
+        BOOT,
+        ERROR,
+        SD_ERROR
     };
 
 private:
     const uint16_t PixelCount = 12; // Number of NeoPixels in the ring
-    const uint8_t PixelPin = 6;     // Pin where NeoPixels are connected
+    const uint8_t PixelPin = 10;    // Pin where NeoPixels are connected
     NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod> strip;
     Status status = Status::OFF;
+
+    float count = 0;
 
 public:
     NeopixelRing() : strip(PixelCount, PixelPin)
@@ -23,6 +27,8 @@ public:
     void begin()
     {
         strip.Begin();
+        strip.ClearTo(RgbColor(0, 0, 0));
+        strip.Show();
     }
     void setPixelColor(uint16_t index, RgbColor color)
     {
@@ -34,6 +40,7 @@ public:
     void show()
     {
         strip.Show();
+        delay(30); // Allow time for the strip to update
     }
     void setStatus(Status s)
     {
@@ -41,49 +48,43 @@ public:
     }
     void update()
     {
-        static uint16_t offset = 0;
-        static uint8_t brightness = 0;
-        static bool increasing = true;
-
+        Serial.println((int)status);
         switch (status)
         {
         case Status::ON:
-            // Rotating rainbow effect
-            for (uint16_t i = 0; i < PixelCount; i++)
-            {
-                uint16_t hue = (offset + (i * 65535 / PixelCount)) % 65535;
-                strip.SetPixelColor(i, HslColor(hue / 65535.0f, 1.0f, 0.5f));
-            }
-            offset = (offset + 1000) % 65535;
+            strip.ClearTo(RgbColor(0, 255, 0));
             break;
 
         case Status::ERROR:
-            // Pulsing red effect
-            if (increasing)
-            {
-                brightness = min(255, brightness + 5);
-                if (brightness >= 255)
-                    increasing = false;
-            }
-            else
-            {
-                brightness = max(0, brightness - 5);
-                if (brightness <= 0)
-                    increasing = true;
-            }
-            strip.ClearTo(RgbColor(brightness, 0, 0));
+        {
+            strip.ClearTo(RgbColor(255, 0, 0));
             break;
+        }
+
+        case Status::BOOT:
+        {
+            strip.ClearTo(RgbColor(100, 255, 0));
+            break;
+        }
+        case Status::SD_ERROR:
+        {
+            strip.ClearTo(RgbColor(255, 255, 0));
+            break;
+        }
 
         case Status::OFF:
             strip.ClearTo(RgbColor(0, 0, 0));
             break;
         }
-
+        count += 0.02f;
+        Serial.println("Showing Neopixel Ring");
+        Serial.flush();
         strip.Show();
+        Serial.println("Neopixel Ring Update Complete");
+        Serial.flush();
     }
     void clear()
     {
         strip.ClearTo(RgbColor(0, 0, 0));
-        strip.Show();
     }
 };

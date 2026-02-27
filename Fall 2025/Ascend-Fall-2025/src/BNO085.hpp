@@ -48,7 +48,7 @@ public:
     }
     void readData()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 7; i++)
         {
             sh2_SensorValue_t sensorValue;
             myIMU.getSensorEvent(&sensorValue);

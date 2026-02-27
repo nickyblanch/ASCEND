@@ -9,11 +9,13 @@
 
 #include "Sensor.hpp"
 #include "SD.hpp"
+#include "FileSystem.hpp"
 // #include "ExampleSensor.hpp"
 #include "UVSensor.hpp"
-#include "IMU.hpp"
+#include "BNO085.hpp"
 #include "SpectralSensor.hpp"
 #include "IRSensor.hpp"
+#include "INA260.hpp"
 // #include "AirQualitySensor.hpp"
 // #include "TempSensor.hpp"
 #include "BME680.hpp"
@@ -23,14 +25,14 @@ class CNS
 {
 private:
     /* data */
-    Sensor *sensors[5] = {
+    Sensor *sensors[6] = {
+        new BNO085(),
         new UVSensor(),
-        new IMU(),
         new SpectralSensor(),
         // new TempSensor(),
         new IRSensor(),
         new BME680(),
-    };
+        new INA260()};
 
     uSD sd;
     int LED_PIN = 13;
@@ -43,6 +45,7 @@ private:
 public:
     CNS();
 
+    void initializeNeopixelRing();
     void initializeSD();
     void initializeMux();
     void initializeSensors();

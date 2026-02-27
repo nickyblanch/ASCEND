@@ -40,7 +40,6 @@ public:
     void readData()
     {
         // uvSensor.setStartState(true);
-        // delay(2000 + uvSensor.getConversionTimeMillis());
         // operational = true;
 
         // Send a start measurement command.

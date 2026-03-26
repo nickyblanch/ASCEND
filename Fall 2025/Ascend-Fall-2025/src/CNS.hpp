@@ -11,11 +11,12 @@
 #include "SD.hpp"
 #include "FileSystem.hpp"
 // #include "ExampleSensor.hpp"
-#include "UVSensor.hpp"
+// #include "UVSensor.hpp"
 #include "BNO085.hpp"
-#include "SpectralSensor.hpp"
-#include "IRSensor.hpp"
+// #include "SpectralSensor.hpp"
+// #include "IRSensor.hpp"
 #include "INA260.hpp"
+#include "TripleSpectral.hpp"
 // #include "AirQualitySensor.hpp"
 // #include "TempSensor.hpp"
 #include "BME680.hpp"
@@ -25,14 +26,11 @@ class CNS
 {
 private:
     /* data */
-    Sensor *sensors[6] = {
-        new BNO085(),
-        new UVSensor(),
-        new SpectralSensor(),
-        // new TempSensor(),
-        new IRSensor(),
-        new BME680(),
-        new INA260()};
+    Sensor *sensors[1] = {
+        // new BNO085(),
+        // new BME680(),
+        // new INA260()
+        new TripleSpectral()};
 
     uSD sd;
     int LED_PIN = 13;
